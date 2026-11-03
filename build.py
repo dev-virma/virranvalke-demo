@@ -36,6 +36,7 @@ FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox=
 NAV = [
   ("index.html", "Koti"),
   ("index.html#palvelut", "Palvelut"),
+  ("index.html#kurssit", "Kurssit"),
   ("tietoa-meista.html", "Tietoa meistä"),
   ("tiimimme.html", "Tiimimme"),
   ("yhteydenotto.html", "Yhteydenotto"),
@@ -94,7 +95,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=12">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
@@ -300,7 +301,7 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
     </div>
     <aside class="aside aside-dark reveal">
       <div class="aside-person">
-        <img class="photo" src="assets/img/olli-virmajoki.jpg" alt="Olli Virmajoki" width="960" height="960" loading="lazy">
+        <img class="photo" src="assets/img/olli-virmajoki-400.jpg" alt="Olli Virmajoki" width="400" height="400" loading="lazy">
         <div><strong>Olli Virmajoki</strong><span>Toimitusjohtaja · Lakimies, OTM</span></div>
       </div>
       <div class="eyebrow">Tietoa meistä</div>
@@ -336,7 +337,7 @@ about = head("Tietoa meistä", "Lakiasiaintoimisto Virranvälke on vuonna 2020 p
       <h3>Lyhyesti</h3>
       <dl>
         <dt>Perustettu</dt><dd>Maaliskuu 2020</dd>
-        <dt>Toimitusjohtaja</dt><dd><a class="dd-person" href="tiimimme.html"><img class="photo photo-xs" src="assets/img/olli-virmajoki.jpg" alt="" width="960" height="960" loading="lazy">Olli Virmajoki</a></dd>
+        <dt>Toimitusjohtaja</dt><dd><a class="dd-person" href="tiimimme.html"><img class="photo photo-xs" src="assets/img/olli-virmajoki-400.jpg" alt="" width="400" height="400" loading="lazy">Olli Virmajoki</a></dd>
         <dt>Toimintatapa</dt><dd>Online-virtuaalitoimisto, ei kiinteää toimitilaa</dd>
         <dt>Palaverit</dt><dd>Skype ja Teams, tapaamiset sopimuksen mukaan</dd>
         <dt>Toiminta-alue</dt><dd>Joensuun seutu, tarvittaessa pääkaupunkiseutu</dd>
@@ -376,7 +377,7 @@ team = head("Tiimimme", "Olemme sitoutuneet auttamaan sinua. Tutustu Lakiasiaint
   <div class="container">
     <article class="card person featured reveal">
       <div class="featured-side">
-        <img class="photo photo-lg" src="assets/img/olli-virmajoki.jpg" alt="Olli Virmajoki" width="960" height="960" loading="lazy">
+        <img class="photo photo-lg" src="assets/img/olli-virmajoki-400.jpg" alt="Olli Virmajoki" width="400" height="400" loading="lazy">
         <h3>Olli Virmajoki</h3>
         <p class="role">Toimitusjohtaja · Lakimies, OTM</p>
         <div class="tags">
@@ -605,7 +606,7 @@ def course_page(c):
       </div>
 
       <div class="author-box reveal">
-        <img class="photo" src="assets/img/olli-virmajoki.jpg" alt="Olli Virmajoki" width="960" height="960" loading="lazy">
+        <img class="photo" src="assets/img/olli-virmajoki-400.jpg" alt="Olli Virmajoki" width="400" height="400" loading="lazy">
         <div>
           <div class="eyebrow">Kurssin tekijä</div>
           <h3>Olli Virmajoki, OTM</h3>

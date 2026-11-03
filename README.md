@@ -60,5 +60,7 @@ ja avaa http://localhost:8787/.
 ## Huomioita
 
 - Hinnat ja alv-prosentit on kopioitu alkuperäiseltä sivustolta sellaisenaan.
-- Olli Virmajoen kuva (`assets/img/olli-virmajoki.jpg`) on haettu alkuperäiseltä sivustolta. Avoimilla paikoilla on kuvan tilalla kysymysmerkki.
+- Olli Virmajoen kuva on haettu alkuperäiseltä sivustolta. Sivuilla käytetään 400 px versiota
+  (`assets/img/olli-virmajoki-400.jpg`); alkuperäinen 960 px kuva on tallessa samassa kansiossa.
+  Avoimilla paikoilla on kuvan tilalla kysymysmerkki.
 - Minidigikurssien linkit vievät alkuperäiseen Campwire-kauppaan.
