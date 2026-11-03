@@ -20,7 +20,6 @@ ne näyttävät vain ilmoituksen. Jokaisen sivun yläreunassa on demo-banneri.
 | `kurssi-edunvalvontavaltakirja.html` | Minidigikurssi: edunvalvontavaltakirja, demo-tilauslomake |
 | `kurssi-perukirja.html` | Minidigikurssi: perukirjan laatiminen, demo-tilauslomake |
 | `kurssi-testamentti.html` | Minidigikurssi: testamentti, demo-tilauslomake |
-| `logo.html` | Logokonseptit (sisäinen arviointisivu, linkki footerissa) |
 
 Kurssisivujen sisältö on tiivistetty Campwire-kaupan myyntisivuilta. Tilauslomake on demo: se
 näyttää vahvistuksen, mutta ei käsittele tilausta eikä maksua. Sivuilla on linkki oikeaan kauppaan.
@@ -36,7 +35,7 @@ oikeassa yläkulmassa on pieni välke. Tiedostot:
 - `assets/logo-wordmark.svg` – vaakalogo tekstillä (fontit Fraunces ja Inter; ilman niitä
   käytetään Georgia/Arial-varafontteja)
 
-Vaihtoehtoiset konseptit B ja C ovat nähtävissä sivulla `logo.html`.
+Vaihtoehtoiset konseptit B ja C poistettiin demosta; ne löytyvät git-historiasta (tiedosto `logo.html`).
 
 ## Rakenne
 
