@@ -479,6 +479,6 @@ svg { flex: none; }
   .hero-card { padding: 24px; }
   .hero::before { display: none; }
   .form { padding: 24px 20px; }
-  .page-hero h1 { font-size: 2rem; }
+  .page-hero h1 { font-size: clamp(1.6rem, 7.6vw, 2.1rem); }
   .order-card { padding: 22px; }
 }
