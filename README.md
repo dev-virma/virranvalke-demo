@@ -17,6 +17,18 @@ ne näyttävät vain ilmoituksen. Jokaisen sivun yläreunassa on demo-banneri.
 | `tietosuojaseloste.html` | Tietosuojaseloste |
 | `kayttoehdot.html` | Käyttöehdot (alkuperäisen sivuston malliteksti) |
 | `tietosuojakaytanto.html` | Tietosuojakäytäntö (alkuperäisen sivuston malliteksti) |
+| `logo.html` | Logokonseptit (sisäinen arviointisivu, linkki footerissa) |
+
+## Logo
+
+Sivustolla on käytössä konsepti A, "Virta-V": kaksi virtaavaa linjaa yhtyvät V-kirjaimeksi ja
+oikeassa yläkulmassa on pieni välke. Tiedostot:
+
+- `assets/logo.svg` – logomerkki tummansinisellä laatalla
+- `assets/logo-wordmark.svg` – vaakalogo tekstillä (fontit Fraunces ja Inter; ilman niitä
+  käytetään Georgia/Arial-varafontteja)
+
+Vaihtoehtoiset konseptit B ja C ovat nähtävissä sivulla `logo.html`.
 
 ## Rakenne
 

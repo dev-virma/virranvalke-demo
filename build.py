@@ -16,7 +16,12 @@ ICON = {
   "video": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg>',
 }
 
-BRAND_MARK = '''<svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#122441"/><path d="M9 12l7 16 4-9 4 9 7-16" fill="none" stroke="#e9d9b5" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>'''
+def brand_mark(uid):
+    """Virta-V-logomerkki. uid erottaa gradientin id:n, jos merkki on sivulla useasti."""
+    return f'''<svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="vv-{uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9d9b5"/><stop offset="1" stop-color="#b8892f"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#122441"/><path d="M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20" fill="none" stroke="url(#vv-{uid})" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z" fill="#e9d9b5"/></svg>'''
+
+BRAND_MARK = brand_mark("h")
+FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23122441'/%3E%3Cpath d='M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20' fill='none' stroke='%23d6b86a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z' fill='%23e9d9b5'/%3E%3C/svg%3E"
 
 NAV = [
   ("index.html", "Koti"),
@@ -49,7 +54,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css?v=2">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23122441'/%3E%3Cpath d='M9 12l7 16 4-9 4 9 7-16' fill='none' stroke='%23e9d9b5' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="{FAVICON}">
 </head>
 <body>
 <div class="demo-banner"><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</div>
@@ -75,7 +80,7 @@ FOOTER = '''<footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a class="brand brand-footer" href="index.html">''' + BRAND_MARK + '''<span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
+        <a class="brand brand-footer" href="index.html">''' + brand_mark("f") + '''<span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
         <p>Lakiasiantuntijat palveluksessasi. Online-virtuaalitoimisto Joensuusta, tapaamiset sopimuksen mukaan.</p>
         <p class="footer-meta">Y-tunnus 3192420-6</p>
       </div>
@@ -100,7 +105,7 @@ FOOTER = '''<footer class="site-footer">
     </div>
     <div class="footer-bottom">
       <span>© 2026 Lakiasiaintoimisto Virranvälke</span>
-      <span>Demo-sivusto · <a href="#" data-cookie-open>Evästeet</a></span>
+      <span>Demo-sivusto · <a href="logo.html">Logokonseptit</a> · <a href="#" data-cookie-open>Evästeet</a></span>
     </div>
   </div>
 </footer>
