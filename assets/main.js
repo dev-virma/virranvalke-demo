@@ -67,6 +67,27 @@
     });
   }
 
+  // Kurssin tilauslomake (demo: ei maksua, ei lähetystä)
+  var orderForm = document.getElementById('order-form');
+  var orderDone = document.getElementById('order-done');
+  if (orderForm && orderDone) {
+    orderForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var e1 = orderForm.querySelector('#o-email'), e2 = orderForm.querySelector('#o-email2');
+      e2.setCustomValidity(e1.value && e1.value !== e2.value ? 'Sähköpostiosoitteet eivät täsmää.' : '');
+      if (!orderForm.checkValidity()) { orderForm.reportValidity(); return; }
+      var target = document.getElementById('order-email');
+      if (target) target.textContent = e1.value;
+      orderForm.hidden = true;
+      orderDone.hidden = false;
+      orderDone.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+      toast('Demo: tilausta ei käsitelty eikä maksua veloitettu.');
+    });
+    orderDone.querySelectorAll('[data-order-reset]').forEach(function (btn) {
+      btn.addEventListener('click', function () { orderDone.hidden = true; orderForm.hidden = false; });
+    });
+  }
+
   // Muut demo-painikkeet
   document.querySelectorAll('[data-demo]').forEach(function (el) {
     el.addEventListener('click', function (ev) {

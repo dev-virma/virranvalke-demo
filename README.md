@@ -17,7 +17,15 @@ ne näyttävät vain ilmoituksen. Jokaisen sivun yläreunassa on demo-banneri.
 | `tietosuojaseloste.html` | Tietosuojaseloste |
 | `kayttoehdot.html` | Käyttöehdot (alkuperäisen sivuston malliteksti) |
 | `tietosuojakaytanto.html` | Tietosuojakäytäntö (alkuperäisen sivuston malliteksti) |
+| `kurssi-edunvalvontavaltakirja.html` | Minidigikurssi: edunvalvontavaltakirja, demo-tilauslomake |
+| `kurssi-perukirja.html` | Minidigikurssi: perukirjan laatiminen, demo-tilauslomake |
+| `kurssi-testamentti.html` | Minidigikurssi: testamentti, demo-tilauslomake |
 | `logo.html` | Logokonseptit (sisäinen arviointisivu, linkki footerissa) |
+
+Kurssisivujen sisältö on tiivistetty Campwire-kaupan myyntisivuilta. Tilauslomake on demo: se
+näyttää vahvistuksen, mutta ei käsittele tilausta eikä maksua. Sivuilla on linkki oikeaan kauppaan.
+
+Julkinen demo: https://dev-virma.github.io/virranvalke-demo/ (GitHub Pages, main-haara).
 
 ## Logo
 

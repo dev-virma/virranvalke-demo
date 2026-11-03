@@ -14,6 +14,14 @@ ICON = {
   "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
   "mail": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
   "video": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg>',
+  "book": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h13"/><path d="M8 7h7"/></svg>',
+  "doc": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h6"/></svg>',
+  "check": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg>',
+  "play": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z"/></svg>',
+  "list": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="5" cy="6" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="5" cy="18" r="1"/></svg>',
+  "chat": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+  "user": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  "shield": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
 }
 # Kiinteä koko ikoneille, jotta ne eivät piirry jättikokoisina, jos CSS ei ole vielä latautunut.
 ICON = {k: v.replace('<svg ', '<svg width="24" height="24" ', 1) for k, v in ICON.items()}
@@ -86,7 +94,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=8">
+<link rel="stylesheet" href="assets/style.css?v=10">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
@@ -131,6 +139,7 @@ FOOTER = '''</main>
       <div>
         <h4>Sivusto</h4>
         <ul>
+          <li><a href="index.html#kurssit">Minidigikurssit</a></li>
           <li><a href="tietoa-meista.html">Tietoa meistä</a></li>
           <li><a href="tiimimme.html">Tiimimme</a></li>
           <li><a href="tietosuojaseloste.html">Tietosuojaseloste</a></li>
@@ -154,7 +163,7 @@ FOOTER = '''</main>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=5"></script>
+<script src="assets/main.js?v=6"></script>
 </body>
 </html>
 '''
@@ -202,7 +211,7 @@ def course(title, desc, price, url):
   <h3>{title}</h3>
   <p>{desc}</p>
   <div class="price"><strong>{price} €</strong><span>lokakuun loppuun 2026 saakka</span></div>
-  <a class="btn btn-primary btn-sm" href="{url}" target="_blank" rel="noopener">Katso ja tilaa</a>
+  <a class="btn btn-primary btn-sm" href="{url}">Katso ja tilaa</a>
 </article>'''
 
 # ---------- ETUSIVU ----------
@@ -271,7 +280,7 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
       <p>Kaikki tarpeellinen tieto edunvalvontavaltakirjan, perukirjan ja testamentin laadinnasta tiiviinä verkkokursseina. Säästä omatoimisesti paljon rahaa.</p>
     </div>
     <div class="grid grid-3">
-''' + course("Edunvalvontavaltakirja: mielenrauhaa arkeen", "Kaikki tarpeellinen tieto edunvalvontavaltakirjan laadinnasta.", "59", "https://lakitstoviva.campwire.com/checkout/edunvalvontavaltakirja-mielenrauhaa-arkeen-1237f954") + course("Perukirjan laatiminen – askel askeleelta", "Kaikki tarpeellinen tieto perunkirjoituksesta.", "79", "https://lakitstoviva.campwire.com/checkout/perukirjan-laatiminen-askel-askeleelta-3d7a720c") + course("Testamenttikurssi: hoida tärkeä asia kuntoon", "Mielenrauhaa ja selkeyttä helposti. Kaikki tarpeellinen tieto testamentin laadinnasta.", "59", "https://lakitstoviva.campwire.com/checkout/testamenttikurssi-hoida-tarkea-asia-kuntoon-mielenrauhaa-ja-selkeytta-8a8e5426") + '''
+''' + course("Edunvalvontavaltakirja: mielenrauhaa arkeen", "Kaikki tarpeellinen tieto edunvalvontavaltakirjan laadinnasta.", "59", "kurssi-edunvalvontavaltakirja.html") + course("Perukirjan laatiminen – askel askeleelta", "Kaikki tarpeellinen tieto perunkirjoituksesta.", "79", "kurssi-perukirja.html") + course("Testamenttikurssi: hoida tärkeä asia kuntoon", "Mielenrauhaa ja selkeyttä helposti. Kaikki tarpeellinen tieto testamentin laadinnasta.", "59", "kurssi-testamentti.html") + '''
     </div>
     <p class="note">Minidigikursseissa on käytetty myös tekoälysisältöjä.</p>
   </div>
@@ -577,6 +586,182 @@ policy = head("Tietosuojakäytäntö", "Lakiasiaintoimisto Virranvälkkeen tieto
 </section>
 ''' + FOOTER
 
+# ---------- MINIDIGIKURSSIT ----------
+def course_page(c):
+    includes = "".join(
+        f'<li><span class="inc-icon">{ICON[i]}</span><div><strong>{t}</strong><p>{d}</p></div></li>'
+        for i, t, d in c["includes"]
+    )
+    intro = "".join(f"<p>{p}</p>" for p in c["intro"])
+    author = "".join(f"<p>{p}</p>" for p in c["author"])
+    why = "".join(f"<p>{p}</p>" for p in c["why"])
+    outcomes = "".join(f"<li>{o}</li>" for o in c["outcomes"])
+    return head(c["title"], c["hook"]) + header("index.html#kurssit") + page_hero("Minidigikurssit", c["title"], c["hook"]) + f'''
+<section class="section">
+  <div class="container course-layout">
+    <div class="course-body">
+      <div class="prose">
+        {intro}
+      </div>
+
+      <div class="author-box reveal">
+        <img class="photo" src="assets/img/olli-virmajoki.jpg" alt="Olli Virmajoki" width="960" height="960" loading="lazy">
+        <div>
+          <div class="eyebrow">Kurssin tekijä</div>
+          <h3>Olli Virmajoki, OTM</h3>
+          {author}
+        </div>
+      </div>
+
+      <h2>Mitä saat?</h2>
+      <p class="lead">{c["includes_lead"]}</p>
+      <ul class="includes reveal">{includes}</ul>
+
+      <div class="outcome-box reveal">
+        <h3>Kun olet käynyt materiaalin läpi, sinulla on</h3>
+        <ul>{outcomes}</ul>
+      </div>
+
+      <h2>Miksi tämä toimii?</h2>
+      <div class="prose">{why}</div>
+
+      <div class="guarantee reveal">
+        <span class="inc-icon">{ICON["shield"]}</span>
+        <div>
+          <h3>14 päivän Mielenrauha-takuu</h3>
+          <p>{c["guarantee"]}</p>
+          <p class="muted">Kurssi on käytettävissä 100 vuorokautta kurssille kirjautumisesta lukien, joten sisällön voi käydä läpi kaikessa rauhassa ja siihen voi palata myöhemmin uudestaan.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="order-card reveal" id="order">
+      <div class="order-head">
+        <span class="badge">Lanseeraushinta</span>
+        <h3>{c["title"]}</h3>
+        <div class="price-row">
+          <strong>{c["price"]},00 €</strong>
+          <s>{c["normal"]},00 €</s>
+        </div>
+        <p class="muted">sis. alv 25,5 % · lanseeraushinta voimassa lokakuun 2026 loppuun</p>
+      </div>
+      <form class="order-form" id="order-form" novalidate>
+        <div class="fields-2">
+          <div class="field"><label for="o-first">Etunimi *</label><input id="o-first" name="first" type="text" required autocomplete="given-name"></div>
+          <div class="field"><label for="o-last">Sukunimi *</label><input id="o-last" name="last" type="text" required autocomplete="family-name"></div>
+        </div>
+        <div class="field"><label for="o-email">Sähköpostiosoite *</label><input id="o-email" name="email" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="o-email2">Vahvista sähköpostiosoite *</label><input id="o-email2" name="email2" type="email" required autocomplete="email"></div>
+        <label class="check"><input type="checkbox" required><span>Olen lukenut ja hyväksyn <a href="kayttoehdot.html">käyttöehdot</a> sekä <a href="tietosuojaseloste.html">tietosuojaselosteen</a>. *</span></label>
+        <button class="btn btn-gold" type="submit">Jatka maksuun</button>
+        <p class="form-demo">Demo: tilausta ei käsitellä eikä maksua veloiteta. Oikea tilaus tehdään toistaiseksi <a href="{c["campwire"]}" target="_blank" rel="noopener">Campwiren kaupassa</a>.</p>
+        <p class="pay-note">{ICON["shield"]} Kortti-, mobiili-, verkkopankki-, lasku- ja osamaksu</p>
+      </form>
+      <div class="order-done" id="order-done" hidden>
+        <span class="inc-icon">{ICON["check"]}</span>
+        <h3>Kiitos tilauksestasi! (demo)</h3>
+        <p>Oikeassa versiossa siirtyisit nyt maksuvaiheeseen ja saisit kurssin kirjautumistiedot sähköpostiisi osoitteeseen <strong id="order-email"></strong>.</p>
+        <p class="muted">Tämä on esittelyversio: mitään ei lähetetty eikä veloitettu.</p>
+        <button class="btn btn-outline btn-sm" type="button" data-order-reset>Palaa lomakkeeseen</button>
+      </div>
+    </aside>
+  </div>
+</section>
+''' + FOOTER
+
+COURSES = [
+  dict(
+    slug="kurssi-edunvalvontavaltakirja.html",
+    title="Edunvalvontavaltakirja: mielenrauhaa arkeen",
+    hook="Tee edunvalvontavaltakirja nyt – ja elä eläkepäiväsi mielenrauhassa tietäen, että asiasi ovat turvassa.",
+    price=59, normal=79,
+    campwire="https://lakitstoviva.campwire.com/checkout/edunvalvontavaltakirja-mielenrauhaa-arkeen-1237f954",
+    intro=[
+      "Moni eläkkeelle jäävä miettii, mitä tapahtuu sitten, jos oma toimintakyky heikkenee eikä enää itse pysty hoitamaan asioitaan. Jos mitään ei ole etukäteen sovittu, läheiset joutuvat selvittämään asioita viranomaisten kautta, usein aikaa vievästi ja raskaasti.",
+      "Monet lykkäävät edunvalvontavaltakirjan tekemistä, koska kuvittelevat sen olevan vaikeaa, kallista tai vain juristien tehtävä. Tämä ei pidä paikkaansa. On olemassa selkeä, helppo ja edullinen tapa tehdä edunvalvontavaltakirja itse – oikein ja turvallisesti.",
+      "<strong>Kuvittele hetki elämää, jossa tämä asia on jo hoidettu.</strong> Sinulla on asiakirja, joka turvaa sinun ja läheistesi tulevaisuuden. Et enää murehdi ”mitä jos” -tilanteita. Se tunne on mielenrauha.",
+    ],
+    author=[
+      "Olen Olli Virmajoki, oikeustieteen maisteri ja lupalakimies. Työssäni olen huomannut, että ihmiset lykkäävät edunvalvontavaltakirjan tekemistä, vaikka tietävät sen olevan tärkeää. Juridiikka tuntuu vaikealta, ohjeet ovat epäselviä ja lopulta asia jää tekemättä.",
+      "Siksi olen tehnyt tästä aiheesta oppaan, mallipohjan ja tarkistuslistan, jotka ohjaavat sinut vaihe vaiheelta niin, että voit itse laatia edunvalvontavaltakirjasi turvallisesti ja luottavaisin mielin.",
+    ],
+    includes_lead="Tämä ei ole vain opas, vaan kokonaisuus, joka vie sinut epävarmuudesta mielenrauhaan vaihe vaiheelta.",
+    includes=[
+      ("book", "Selkeä, ladattava opas", "Yksinkertainen ja ymmärrettävä selitys siitä, mikä edunvalvontavaltakirja on ja miksi se on tärkeä. Ei vaikeaa juristikieltä, vaan käytännönläheistä ohjeistusta."),
+      ("doc", "Mallipohja valmiiksi täytettäväksi", "Seuraa ohjeita ja täytä oma valtakirjasi. Varmistat, että asiakirjasi on lainvoimainen ja oikein laadittu."),
+      ("check", "Tarkistuslista", "Käy kohta kohdalta läpi ja varmista, että mikään ei jää huomaamatta."),
+      ("play", "Video- tai audio-ohjeet", "Käytännönläheiset ohjeet, joita voit kuunnella tai katsella omaan tahtiisi – kuin asiantuntija olisi rinnallasi."),
+    ],
+    outcomes=["valmiiksi laadittu edunvalvontavaltakirja", "tieto ja ymmärrys sen merkityksestä", "rauhallinen mieli, kun tiedät, että asiasi ovat järjestyksessä"],
+    why=[
+      "Ilman edunvalvontavaltakirjaa läheisesi joutuvat hakemaan edunvalvojan käräjäoikeuden kautta. Prosessi voi kestää kuukausia ja aiheuttaa sekä vaivaa että ylimääräisiä kustannuksia. Oikein laadittu edunvalvontavaltakirja varmistaa, että juuri sinä päätät, kuka hoitaa asioitasi ja miten.",
+      "Paketti perustuu vuosien asiantuntemukseen juridisista asiakirjoista ja käytännön kokemukseen siitä, mitkä kohdat aiheuttavat ihmisille eniten epävarmuutta. Se purkaa vaikeat asiat ymmärrettäviksi ja varmistaa, että lopputulos on turvallinen.",
+    ],
+    guarantee="Jos et koe tämän paketin auttavan sinua edunvalvontavaltakirjan laatimisessa 14 päivän sisällä, saat veloituksetta puolen tunnin henkilökohtaisen lisäneuvonnan (arvo yli 100 €).",
+  ),
+  dict(
+    slug="kurssi-perukirja.html",
+    title="Perukirjan laatiminen – askel askeleelta",
+    hook="Perukirjan laatiminen ei tarvitse olla painajainen, vaan selkeä, hallittava prosessi.",
+    price=79, normal=99,
+    campwire="https://lakitstoviva.campwire.com/checkout/perukirjan-laatiminen-askel-askeleelta-3d7a720c",
+    intro=[
+      "Kun läheinen on menehtynyt, surun keskellä viimeinen asia, jonka haluaisit kohdata, on epävarmuus ja kaaos perukirjan kanssa. Silti juuri siinä tilanteessa monet joutuvat ensimmäistä kertaa tekemään tämän vaativan asiakirjan – yksin, ilman kokemusta ja peläten, että jokin tärkeä unohtuu.",
+      "Perukirja on mahdollista laatia itse oikein ja huolellisesti, mutta vain, jos käytössäsi on selkeä reitti, joka vie sinut vaihe vaiheelta alusta loppuun ilman arvailuja.",
+      "<strong>Kuvittele tilanne, jossa</strong> tiedät tarkalleen, mitä tehdä ja missä järjestyksessä, voit luottaa siihen, ettei mikään tärkeä jää huomaamatta, ja saat rauhaa ja aikaa käsitellä surua sen sijaan, että hukut byrokratian pyörteisiin.",
+    ],
+    author=[
+      "Minäkin olen ollut tilanteessa, jossa perukirjan laatiminen osui keskelle suurta surua. Muistan yhä, kuinka epävarma olo oli: mistä aloittaa, mitä asiakirjoja tarvitaan ja mitä kaikkea laki vaatii.",
+      "Lakimiehenä löysin lopulta järjestelmällisen tavan tehdä asiat oikein. Olen paketoinut ratkaisun selkeäksi oppaaksi, jotta sinä voit säästää hermojasi, saada varmuuden oikeista askelista ja ennen kaikkea aikaa surulle.",
+    ],
+    includes_lead="Opas vie sinut kuudessa vaiheessa pisteestä A (täysin epätietoinen, mistä edes aloittaa) pisteeseen B (valmis perukirja, jonka voit toimittaa viranomaisille luottavaisin mielin).",
+    includes=[
+      ("list", "Kuuden vaiheen muutosmatka", "Aloitus ja valmistelut, pesän osakkaiden selvittäminen, varojen ja velkojen kartoittaminen, perunkirjoitustilaisuuden järjestäminen, perukirjan laatiminen sekä toimittaminen verottajalle."),
+      ("book", "PDF-tekstiopas", "Luettavissa läppäriltä tai tulostettavissa."),
+      ("play", "Videot", "Käyn asiat läpi rauhallisesti ja käytännönläheisesti."),
+      ("doc", "Mallipohjat", "Täyttäminen on helppoa valmiiden pohjien avulla."),
+      ("check", "Tarkistuslistat", "Varmistat, että kaikki asiat on tehty oikeassa järjestyksessä."),
+    ],
+    outcomes=["valmis perukirja, jonka voit toimittaa viranomaisille", "vältät yleisimmät virheet, jotka aiheuttavat lisäselvityksiä ja viivästyksiä", "säästät rahaa, kun sinun ei tarvitse heti turvautua kalliiseen asiantuntijaan"],
+    why=[
+      "<strong>Asiantuntijuus:</strong> oppaan on koonnut Olli Virmajoki, OTM, luvan saanut oikeudenkäyntiavustaja, joka on auttanut lukuisia ihmisiä perintöoikeudellisissa asioissa. <strong>Käytännön kokemus:</strong> olen itsekin joutunut laatimaan perukirjan omassa perheessäni.",
+      "<strong>Selkeä menetelmä:</strong> kuuden vaiheen rakenne varmistaa, ettei mitään tärkeää jää välistä ja että asiat etenevät loogisesti alusta loppuun. Sama prosessi on auttanut monia ensikertalaisia laatimaan perukirjan onnistuneesti ilman turhaa stressiä.",
+    ],
+    guarantee="Jos huomaat oppaan käytön jälkeen, ettei se sovikaan sinulle tai et koe saavasi siitä apua, lähetä viesti 14 päivän sisällä ostosta, niin saat henkilökohtaista neuvontaa puoli tuntia maksutta (arvo yli 100 €).",
+  ),
+  dict(
+    slug="kurssi-testamentti.html",
+    title="Testamenttikurssi: hoida tärkeä asia kuntoon",
+    hook="Tee tärkein paperi elämässäsi selkeästi ja varmasti – saat mielenrauhan, kun oma tahto on turvattu.",
+    price=59, normal=79,
+    campwire="https://lakitstoviva.campwire.com/checkout/testamenttikurssi-hoida-tarkea-asia-kuntoon-mielenrauhaa-ja-selkeytta-8a8e5426",
+    intro=[
+      "Olet ehkä miettinyt testamenttia jo pitkään. Ehkä olet avannut muutaman mallipohjan netistä, mutta sulkenut selaimen turhautuneena. Mitä pidempään lykkää päätöstä, sitä enemmän epävarmuus painaa mieltä: miten käy mökille, säästöille tai tavaroille, kun minua ei enää ole?",
+      "Moni yrittää selvittää kaiken itse tai käyttää vanhentunutta mallia, joka ei enää ole lainvoimainen. Toiset maksavat satoja euroja juristille, vaikka haluaisivat vain yksinkertaisen ja selkeän testamentin.",
+      "<strong>Entä jos sen voisi tehdä helposti, varmasti ja rauhassa</strong> – askel askeleelta, ilman monimutkaista juristikieltä? Paperi on valmis, allekirjoitettu ja tallessa. Tiedät, että oma tahto on turvattu ja läheisesi saavat selkeät ohjeet.",
+    ],
+    author=[
+      "Olen Olli Virmajoki, oikeustieteen maisteri ja luvan saanut oikeudenkäyntiavustaja. Työssäni olen nähnyt, miten paljon epäselvyydet testamentissa voivat aiheuttaa surua, ristiriitoja ja pitkiä prosesseja, vaikka kaikki olisi voitu välttää selkeällä ennakkosuunnittelulla.",
+      "Haluan auttaa tavallisia ihmisiä hoitamaan tärkeän asian kuntoon ilman juristikieltä, stressiä ja kalliita laskuja. Jokaisella on oikeus selkeyteen ja mielenrauhaan.",
+    ],
+    includes_lead="Kurssi vie sinut selkeän ja varman testamentin laatimiseen askel askeleelta, ilman lakikoulutusta tai turhaa byrokratiaa. Etenet omassa tahdissasi.",
+    includes=[
+      ("book", "Johdanto: mitä testamentti oikeasti tekee", "Selkeä selitys eri testamenttilajeista ja niiden merkityksistä."),
+      ("list", "Askel askeleelta -ohjeistus", "Kurssin ydin: etenet luonnostelusta valmiiseen testamenttiin. Mukana täytettävä testamenttipohja (PDF/Word)."),
+      ("check", "Muistilista ja tarkistuslista", "Tulostettavat listat varmistavat, että yksikään tärkeä kohta ei jää huomaamatta."),
+      ("doc", "Käytännön esimerkit ja erityistilanteet", "Avio- ja avoparit, mökki, sijoitusasunto, uusperhe, lapsettomuus ja muut elämäntilanteet."),
+      ("chat", "Tuki ja kysymysosio", "Voit esittää kysymyksiä kurssialustalla. Vastaan itse kysymyksiin kerran viikossa."),
+      ("user", "Henkilökohtainen sparraus (valinnainen)", "Puolen tunnin henkilökohtainen neuvonta, jossa testamenttisi käydään läpi yksityiskohtaisesti."),
+    ],
+    outcomes=["valmis testamentti, joka on laadittu oikein ja toimii juuri sinun tilanteessasi", "selkeä ymmärrys eri vaihtoehdoista ja usein epäselviksi jäävistä kohdista", "mielenrauha, koska tärkeä paperi on tehty varmasti ja oikein"],
+    why=[
+      "Testamenttikurssi perustuu voimassa olevaan lainsäädäntöön ja käytännön kokemukseen todellisista tilanteista. Ohjeet ovat testattuja, selkeitä ja ymmärrettäviä.",
+      "Kaikki materiaali on tekstimuotoista, helposti luettavaa ja selkeästi jäsenneltyä. Voit edetä omaan tahtiin, palata kohtiin myöhemmin ja tallentaa kaiken itsellesi pysyvästi.",
+    ],
+    guarantee="Jos tunnet, ettei kurssi auttanut sinua eteenpäin, saat puolen tunnin henkilökohtaisen neuvonnan veloituksetta (arvo yli 100 €). Et jää yksin etkä ilman apua.",
+  ),
+]
+
 pages = {
   "index.html": index,
   "tietoa-meista.html": about,
@@ -586,6 +771,8 @@ pages = {
   "kayttoehdot.html": terms,
   "tietosuojakaytanto.html": policy,
 }
+for c in COURSES:
+    pages[c["slug"]] = course_page(c)
 for name, html in pages.items():
     with open(os.path.join(OUT, name), "w", encoding="utf-8", newline="\n") as f:
         f.write(html)

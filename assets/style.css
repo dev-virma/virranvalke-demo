@@ -32,7 +32,7 @@ body {
 img { max-width: 100%; display: block; }
 a { color: var(--navy-soft); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--gold); }
-h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 600; line-height: 1.15; margin: 0 0 .5em; color: var(--navy); letter-spacing: -0.01em; }
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 600; line-height: 1.15; margin: 0 0 .5em; color: var(--navy); letter-spacing: -0.01em; overflow-wrap: break-word; hyphens: auto; }
 h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); }
 h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
 h3 { font-size: 1.35rem; }
@@ -349,6 +349,51 @@ svg { flex: none; }
 .fields-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
 .form-demo { margin-top: 12px; font-size: .85rem; color: var(--ink-mute); }
 
+/* Minidigikurssit */
+.course-layout { display: grid; grid-template-columns: 1.35fr .95fr; gap: 48px; align-items: start; }
+.course-body h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-top: 2.5rem; }
+.course-body .lead { margin-bottom: 1.25rem; }
+.author-box { display: flex; gap: 20px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin: 2rem 0; box-shadow: var(--shadow); }
+.author-box .photo { width: 88px; height: 88px; box-shadow: 0 0 0 4px var(--gold-soft); }
+.author-box h3 { margin: 0 0 .5rem; }
+.author-box p { color: var(--ink-soft); margin-bottom: .75em; }
+.author-box p:last-child { margin-bottom: 0; }
+.includes { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 14px; }
+.includes li { display: flex; gap: 14px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+.inc-icon { flex: none; width: 42px; height: 42px; border-radius: 11px; background: var(--gold-soft); color: var(--navy); display: grid; place-items: center; }
+.inc-icon svg { width: 22px; height: 22px; }
+.includes strong { display: block; color: var(--navy); margin-bottom: 2px; }
+.includes p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+.outcome-box { background: var(--navy); color: var(--white); border-radius: var(--radius); padding: 28px; margin: 1.5rem 0; }
+.outcome-box h3 { color: var(--gold-soft); margin-top: 0; font-size: 1.2rem; }
+.outcome-box ul { margin: 0; padding-left: 1.2em; color: rgba(255,255,255,.85); }
+.outcome-box li { margin-bottom: 6px; }
+.guarantee { display: flex; gap: 18px; align-items: flex-start; background: var(--gold-soft); border-radius: var(--radius); padding: 24px; margin-top: 2rem; color: var(--navy-deep); }
+.guarantee h3 { margin: 0 0 .4rem; }
+.guarantee p { margin: 0 0 .6em; }
+.guarantee .inc-icon { background: var(--navy); color: var(--gold-soft); }
+.guarantee .muted { color: rgba(11, 24, 48, .65); font-size: .9rem; }
+.order-card { position: sticky; top: 96px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: 0 24px 50px rgba(18, 36, 65, .14); }
+.order-head { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+.order-head .badge { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--gold); color: var(--navy-deep); padding: 4px 10px; border-radius: 999px; margin-bottom: 10px; }
+.order-head h3 { font-size: 1.25rem; margin-bottom: .5rem; }
+.order-head .muted { font-size: .85rem; margin: 0; }
+.price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+.price-row strong { font-family: var(--font-serif); font-size: 2.2rem; color: var(--navy); line-height: 1; }
+.price-row s { color: var(--ink-mute); font-size: 1.05rem; }
+.order-form .field { margin-bottom: 12px; }
+.order-form .btn { width: 100%; margin-top: 6px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; color: var(--ink-soft); margin: 4px 0 12px; }
+.check input { margin-top: 4px; accent-color: var(--gold); }
+.pay-note { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--ink-mute); margin: 12px 0 0; }
+.pay-note svg { width: 16px; height: 16px; }
+.order-done { text-align: center; padding: 8px 0; }
+.order-done .inc-icon { margin: 0 auto 14px; width: 56px; height: 56px; background: #e7f3ec; color: var(--ok); }
+.order-done .inc-icon svg { width: 28px; height: 28px; }
+.order-done h3 { margin-bottom: .5rem; }
+.order-done p { color: var(--ink-soft); font-size: .95rem; }
+.order-done .btn { margin-top: 8px; }
+
 /* Legal */
 .legal { max-width: 74ch; }
 .legal h2 { font-size: 1.35rem; margin-top: 2.2rem; }
@@ -412,8 +457,9 @@ svg { flex: none; }
   .grid-2, .grid-3, .team, .pricing { grid-template-columns: 1fr 1fr; }
   /* Kolmen kortin ryhmässä viimeinen kortti levenee koko riville, ettei se jää orvoksi */
   .grid-3 > :last-child:nth-child(odd), .pricing > :last-child:nth-child(odd) { grid-column: 1 / -1; }
-  .split, .contact-grid, .footer-grid, .featured { grid-template-columns: 1fr; }
+  .split, .contact-grid, .footer-grid, .featured, .course-layout { grid-template-columns: 1fr; }
   .featured { padding: 28px; }
+  .order-card { position: static; }
 }
 @media (max-width: 860px) {
   .nav-toggle { display: inline-flex; }
@@ -433,4 +479,6 @@ svg { flex: none; }
   .hero-card { padding: 24px; }
   .hero::before { display: none; }
   .form { padding: 24px 20px; }
+  .page-hero h1 { font-size: 2rem; }
+  .order-card { padding: 22px; }
 }
