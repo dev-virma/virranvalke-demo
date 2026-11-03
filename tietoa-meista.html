@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=12">
+<link rel="stylesheet" href="assets/style.css?v=13">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23122441'/%3E%3Cpath d='M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20' fill='none' stroke='%23d6b86a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z' fill='%23e9d9b5'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -26,7 +26,7 @@
     <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <nav class="nav" id="nav"><a href="index.html">Koti</a><a href="index.html#palvelut">Palvelut</a><a href="index.html#kurssit">Kurssit</a><a href="tietoa-meista.html" aria-current="page">Tietoa meistä</a><a href="tiimimme.html">Tiimimme</a><a href="yhteydenotto.html">Yhteydenotto</a><a class="btn btn-gold btn-sm" href="tel:+358505598200"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> 050 559 8200</a></nav>
+    <nav class="nav" id="nav"><a href="index.html">Koti</a><a href="index.html#palvelut">Palvelut</a><a href="index.html#kurssit">Kurssit</a><a href="tietoa-meista.html" aria-current="page">Tietoa meistä</a><a href="tiimimme.html">Tiimimme</a><a href="yhteydenotto.html">Yhteydenotto</a><a class="btn btn-gold btn-sm" href="ajanvaraus.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M8 14h3"/><path d="M13 14h3"/></svg> Varaa aika</a></nav>
   </div>
 </header>
 <main id="main">
@@ -102,10 +102,11 @@
   <div class="container">
     <div>
       <h2>Ensimmäinen konsultaatio on ilmainen</h2>
-      <p>Noin 15 minuutin toimeksiannon selvittämistapaaminen ei maksa mitään. Soita tai jätä yhteydenottopyyntö.</p>
+      <p>Noin 15 minuutin toimeksiannon selvittämistapaaminen ei maksa mitään. Varaa aika kalenterista, soita tai jätä yhteydenottopyyntö.</p>
     </div>
     <div class="hero-actions">
-      <a class="btn btn-light" href="tel:+358505598200">Soita +358 50 559 8200</a>
+      <a class="btn btn-light" href="ajanvaraus.html">Varaa maksuton aika</a>
+      <a class="btn btn-outline-light" href="tel:+358505598200">Soita +358 50 559 8200</a>
       <a class="btn btn-outline-light" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
     </div>
   </div>
@@ -125,12 +126,14 @@
           <li><a href="tel:+358505598200">+358 50 559 8200</a></li>
           <li><a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a></li>
           <li><a href="yhteydenotto.html">Yhteydenottolomake</a></li>
+          <li><a href="ajanvaraus.html">Ajanvaraus</a></li>
         </ul>
       </div>
       <div>
         <h4>Sivusto</h4>
         <ul>
           <li><a href="index.html#kurssit">Minidigikurssit</a></li>
+          <li><a href="index.html#ukk">Usein kysytyt kysymykset</a></li>
           <li><a href="tietoa-meista.html">Tietoa meistä</a></li>
           <li><a href="tiimimme.html">Tiimimme</a></li>
           <li><a href="tietosuojaseloste.html">Tietosuojaseloste</a></li>
@@ -154,6 +157,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=6"></script>
+<script src="assets/main.js?v=7"></script>
 </body>
 </html>

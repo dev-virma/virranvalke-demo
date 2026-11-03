@@ -23,6 +23,7 @@ ICON = {
   "user": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
   "shield": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
 }
+ICON["calendar"] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M8 14h3"/><path d="M13 14h3"/></svg>'
 # Kiinteä koko ikoneille, jotta ne eivät piirry jättikokoisina, jos CSS ei ole vielä latautunut.
 ICON = {k: v.replace('<svg ', '<svg width="24" height="24" ', 1) for k, v in ICON.items()}
 
@@ -95,7 +96,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=12">
+<link rel="stylesheet" href="assets/style.css?v=13">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
@@ -114,7 +115,7 @@ def header(current):
     <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <nav class="nav" id="nav">{links}<a class="btn btn-gold btn-sm" href="tel:+358505598200">{ICON["phone"]} 050 559 8200</a></nav>
+    <nav class="nav" id="nav">{links}<a class="btn btn-gold btn-sm" href="ajanvaraus.html">{ICON["calendar"]} Varaa aika</a></nav>
   </div>
 </header>
 <main id="main">
@@ -135,12 +136,14 @@ FOOTER = '''</main>
           <li><a href="tel:+358505598200">+358 50 559 8200</a></li>
           <li><a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a></li>
           <li><a href="yhteydenotto.html">Yhteydenottolomake</a></li>
+          <li><a href="ajanvaraus.html">Ajanvaraus</a></li>
         </ul>
       </div>
       <div>
         <h4>Sivusto</h4>
         <ul>
           <li><a href="index.html#kurssit">Minidigikurssit</a></li>
+          <li><a href="index.html#ukk">Usein kysytyt kysymykset</a></li>
           <li><a href="tietoa-meista.html">Tietoa meistä</a></li>
           <li><a href="tiimimme.html">Tiimimme</a></li>
           <li><a href="tietosuojaseloste.html">Tietosuojaseloste</a></li>
@@ -164,7 +167,7 @@ FOOTER = '''</main>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=6"></script>
+<script src="assets/main.js?v=7"></script>
 </body>
 </html>
 '''
@@ -183,10 +186,11 @@ CTA = '''<section class="cta">
   <div class="container">
     <div>
       <h2>Ensimmäinen konsultaatio on ilmainen</h2>
-      <p>Noin 15 minuutin toimeksiannon selvittämistapaaminen ei maksa mitään. Soita tai jätä yhteydenottopyyntö.</p>
+      <p>Noin 15 minuutin toimeksiannon selvittämistapaaminen ei maksa mitään. Varaa aika kalenterista, soita tai jätä yhteydenottopyyntö.</p>
     </div>
     <div class="hero-actions">
-      <a class="btn btn-light" href="tel:+358505598200">Soita +358 50 559 8200</a>
+      <a class="btn btn-light" href="ajanvaraus.html">Varaa maksuton aika</a>
+      <a class="btn btn-outline-light" href="tel:+358505598200">Soita +358 50 559 8200</a>
       <a class="btn btn-outline-light" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
     </div>
   </div>
@@ -215,6 +219,57 @@ def course(title, desc, price, url):
   <a class="btn btn-primary btn-sm" href="{url}">Katso ja tilaa</a>
 </article>'''
 
+# ---------- UKK JA ASIAKASPALAUTE ----------
+def faq_item(q, a):
+    return f'<details><summary>{q}</summary><div class="faq-body">{a}</div></details>'
+
+FAQ = [
+  ("Mitä ilmainen alkukartoitus sisältää?",
+   '<p>Noin 15 minuutin puhelu tai videopalaveri, jossa käymme asiasi pääkohdat läpi. Kerromme, kannattaako asiaa viedä eteenpäin, mitä se vaatisi ja mitä se arviolta maksaisi. Kartoitus ei sido sinua mihinkään.</p><p><a href="ajanvaraus.html">Varaa aika suoraan kalenterista</a>.</p>'),
+  ("Paljonko palvelut maksavat?",
+   '<p>Hinnoittelu perustuu tuntihintaan tai etukäteen sovittuun kiinteään hintaan, jota ei ylitetä ilman erillistä sopimista kanssasi. Hintaan vaikuttaa asian laajuus. Ajantasaiset tuntihinnat löydät <a href="tietoa-meista.html#hinnasto">hinnastosta</a>, ja kustannusarvion saat maksuttomassa alkukartoituksessa.</p>'),
+  ("Miten tapaamiset järjestetään, kun teillä ei ole toimitilaa?",
+   '<p>Toimimme täysin verkossa. Neuvottelut hoidetaan puhelimitse tai Teams- ja Skype-yhteyksin, ja asiakirjat toimitetaan sähköisesti. Jos henkilökohtainen tapaaminen on tarpeen, sovimme sen erikseen luottamukselliseen paikkaan Joensuun seudulla tai pääkaupunkiseudulla.</p>'),
+  ("Mitä perunkirjoitukseen tarvitaan?",
+   '<p>Perunkirjoitus on toimitettava kolmen kuukauden kuluessa kuolemasta. Tavallisesti tarvitaan:</p><ul><li>vainajan katkeamaton sukuselvitys ja kuolinpesän osakkaiden virkatodistukset</li><li>pankkien saldo- ja arvotodistukset kuolinpäivältä</li><li>tiedot muusta omaisuudesta ja veloista, kuten asunnosta, autosta, lainoista ja maksamattomista laskuista</li><li>mahdollinen testamentti, avioehtosopimus ja aiemmin kuolleen puolison perukirja</li></ul><p>Autamme asiakirjojen kokoamisessa. Jos haluat laatia perukirjan itse, <a href="kurssi-perukirja.html">minidigikurssi</a> opastaa askel askeleelta.</p>'),
+  ("Mitä eroa on edunvalvontavaltakirjalla ja edunvalvonnalla?",
+   '<p>Edunvalvontavaltakirjalla valitset itse etukäteen henkilön, joka hoitaa asioitasi, jos et myöhemmin itse siihen kykene. Valtakirja tulee voimaan vasta, kun Digi- ja väestötietovirasto vahvistaa sen lääkärinlausunnon perusteella.</p><p>Edunvalvonta on viranomaisen tai tuomioistuimen määräämä järjestely, jossa edunvalvojaa ei välttämättä valitse itse ja jonka toimintaa valvotaan tiukemmin. Valtakirja on yleensä joustavampi ja edullisempi vaihtoehto.</p>'),
+  ("Tarvitsenko testamentin, jos minulla on puoliso ja lapset?",
+   '<p>Ilman testamenttia omaisuus jaetaan perintökaaren mukaan. Testamentilla voit muun muassa turvata puolison asemaa laajemmin kuin laki edellyttää, määrätä että perintö ei kuulu lastesi puolisoiden avio-oikeuden piiriin ja keventää perintöverotusta esimerkiksi hallintaoikeusmääräyksellä.</p><p>Testamentti on tehtävä kirjallisesti kahden esteettömän todistajan läsnä ollessa. <a href="kurssi-testamentti.html">Testamenttikurssilla</a> voit laatia sen itse.</p>'),
+  ("Palveletteko muualla kuin Joensuussa?",
+   '<p>Kyllä. Koska toimimme verkossa, voimme palvella asiakkaita koko Suomessa. Toiminta-alueemme on ensisijaisesti Joensuun seutu ja tarvittaessa pääkaupunkiseutu, mutta etäyhteydet tekevät sijainnista toissijaisen.</p>'),
+  ("Miten tietoni pysyvät luottamuksellisina?",
+   '<p>Lakimiestä sitoo salassapitovelvollisuus. Asiakirjat käsitellään suojatuissa yhteyksissä, ja henkilötietoja käsitellään <a href="tietosuojaseloste.html">tietosuojaselosteen</a> mukaisesti.</p>'),
+]
+
+FAQ_SECTION = '''
+<section class="section faq" id="ukk">
+  <div class="container faq-layout">
+    <div class="reveal">
+      <div class="eyebrow">Usein kysytyt kysymykset</div>
+      <h2>Vastauksia yleisimpiin kysymyksiin</h2>
+      <p class="muted faq-lead">Kokosimme vastaukset kysymyksiin, joita asiakkaamme kysyvät useimmin ennen ensimmäistä yhteydenottoa.</p>
+      <div class="faq-list">''' + "".join(faq_item(q, a) for q, a in FAQ) + '''</div>
+      <p class="muted">Etkö löytänyt vastausta? <a href="ajanvaraus.html">Varaa maksuton alkukartoitus</a> tai <a href="yhteydenotto.html">lähetä kysymys lomakkeella</a>.</p>
+    </div>
+    <div class="faq-aside">
+      <figure class="testimonial reveal">
+        <div class="stars" aria-label="Arvosana 5/5">★★★★★</div>
+        <blockquote>Isäni kuoleman jälkeen perunkirjoitus tuntui ylivoimaiselta. Olli kävi kanssani läpi, mitä papereita tarvitaan, hoiti perukirjan ajallaan ja selitti jokaisen vaiheen niin, että ymmärsin ne. Teams-palaverit sopivat meille hyvin, kun sisarukset asuvat eri puolilla Suomea.</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">MK</span><div><strong>Marja K., Joensuu</strong><span>Perunkirjoitus ja perinnönjako</span></div></figcaption>
+        <p class="demo-tag">Esimerkkipalaute demoa varten, ei oikean asiakkaan antama.</p>
+      </figure>
+      <aside class="aside reveal">
+        <div class="eyebrow">Ajanvaraus</div>
+        <h3>Varaa maksuton 15 minuutin alkukartoitus</h3>
+        <p class="muted">Valitse sopiva aika kalenterista. Soitamme sinulle tai lähetämme Teams-kutsun.</p>
+        <a class="btn btn-primary btn-sm" href="ajanvaraus.html">Varaa aika</a>
+      </aside>
+    </div>
+  </div>
+</section>
+'''
+
 # ---------- ETUSIVU ----------
 index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, työ-, perhe- ja vero-oikeus sekä sosiaaliturva-asiat. Joensuu ja pääkaupunkiseutu.") + header("index.html") + '''
 <section class="hero" id="hero">
@@ -224,7 +279,7 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
       <h1>Lakiasiantuntijat <em>palveluksessasi</em></h1>
       <p class="lead">Palvelemme yrityksiä ja yksityishenkilöitä työ-, yritys-, perhe- ja vero-oikeudellisissa kysymyksissä. Nykyaikainen online-virtuaalitoimisto, jossa asiat hoidetaan tehokkaasti ja luottamuksellisesti.</p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
+        <a class="btn btn-gold" href="ajanvaraus.html">Varaa maksuton aika</a>
         <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
       </div>
       <div class="hero-facts">
@@ -293,7 +348,7 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
       <div class="eyebrow">Näin asiointi etenee</div>
       <h2>Selkeä polku ensimmäisestä yhteydenotosta ratkaisuun</h2>
       <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Ilmainen selvittämistapaaminen</strong><p>Noin 15 minuutin keskustelu, jossa käymme asiasi läpi ja arvioimme, miten sitä kannattaa viedä eteenpäin.</p></div></li>
+        <li><span class="step-num">1</span><div><strong>Ilmainen selvittämistapaaminen</strong><p>Noin 15 minuutin keskustelu, jossa käymme asiasi läpi ja arvioimme, miten sitä kannattaa viedä eteenpäin. <a href="ajanvaraus.html">Varaa aika kalenterista</a>.</p></div></li>
         <li><span class="step-num">2</span><div><strong>Sovitaan hinnoittelusta</strong><p>Tuntihinta tai palvelukohtainen kiinteä hinta, jota ei ylitetä ilman erillistä sopimista kanssasi.</p></div></li>
         <li><span class="step-num">3</span><div><strong>Asia hoidetaan</strong><p>Palaverit verkossa Skype- tai Teams-yhteyksin. Henkilökohtaiset tapaamiset sovitaan erikseen luottamuksellisessa paikassa.</p></div></li>
       </ol>
@@ -312,7 +367,7 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
     </aside>
   </div>
 </section>
-''' + CTA + FOOTER
+''' + FAQ_SECTION + CTA + FOOTER
 
 # ---------- TIETOA MEISTÄ ----------
 def price_card(title, hourly, vat_line, extra=""):
@@ -425,7 +480,7 @@ contact = head("Ota yhteyttä", "Ensimmäinen konsultaatio on ilmainen. Ota yhte
 <section class="section">
   <div class="container contact-grid">
     <div class="info-list">
-''' + info("pin", "Postiosoite", "Lakiasiaintoimisto Virranvälke<br>Torikatu 3 B 12, 80110 Joensuu") + info("video", "Tapaamiset", "Palvelemme sinua nykyaikaisena täysin puhtaana online-virtuaalitoimistona ilman kiinteää toimitilaa. Palaverit ja neuvottelut tapahtuvat verkossa Skype- ja Teams-yhteyksin. Kaikki tapaamiset sovitaan erikseen luottamuksellisessa paikassa tapahtuviksi.") + info("clock", "Aukioloajat", "Maanantai – perjantai 9.00 – 18.00") + info("phone", "Puhelin", '<a href="tel:+358505598200">+358 50 559 8200</a><br><span class="muted">+358 xxxxx xxxx (maksullinen puhelinneuvonta 4,00 € / minuutti)</span>') + info("mail", "Sähköposti", '<a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a>') + '''
+''' + info("calendar", "Ajanvaraus", 'Varaa maksuton 15 minuutin alkukartoitus suoraan kalenterista: <a href="ajanvaraus.html">Varaa aika</a>.') + info("pin", "Postiosoite", "Lakiasiaintoimisto Virranvälke<br>Torikatu 3 B 12, 80110 Joensuu") + info("video", "Tapaamiset", "Palvelemme sinua nykyaikaisena täysin puhtaana online-virtuaalitoimistona ilman kiinteää toimitilaa. Palaverit ja neuvottelut tapahtuvat verkossa Skype- ja Teams-yhteyksin. Kaikki tapaamiset sovitaan erikseen luottamuksellisessa paikassa tapahtuviksi.") + info("clock", "Aukioloajat", "Maanantai – perjantai 9.00 – 18.00") + info("phone", "Puhelin", '<a href="tel:+358505598200">+358 50 559 8200</a><br><span class="muted">+358 xxxxx xxxx (maksullinen puhelinneuvonta 4,00 € / minuutti)</span>') + info("mail", "Sähköposti", '<a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a>') + '''
     </div>
     <form class="form reveal" id="contact-form" novalidate>
       <h3>Jätä yhteydenottopyyntö</h3>
@@ -763,8 +818,102 @@ COURSES = [
   ),
 ]
 
+
+# ---------- AJANVARAUS ----------
+def choice(name, value, title, sub):
+    return f'<label class="choice"><input type="radio" name="{name}" value="{value}" required><span><strong>{title}</strong><small>{sub}</small></span></label>'
+
+TOPICS = [
+  ("Yleinen konsultaatio", "En ole varma, mihin asiani kuuluu"),
+  ("Perheoikeus", "Perunkirjoitus, testamentti, edunvalvonta, ositus"),
+  ("Työsuhdeasiat", "Irtisanominen, lomautus, työsopimus, yt-menettely"),
+  ("Yritysasiat", "Osakassopimukset, yhtiöittäminen, hankinnat"),
+  ("Verotus ja sosiaaliturva", "Verovalitukset, työttömyys- ja toimeentuloturva"),
+]
+METHODS = [
+  ("Puhelu", "Soitamme sinulle sovittuna aikana"),
+  ("Teams-videopuhelu", "Saat kutsun sähköpostiisi"),
+  ("Skype", "Saat kutsun sähköpostiisi"),
+]
+
+booking = head("Ajanvaraus", "Varaa maksuton 15 minuutin alkukartoitus Lakiasiaintoimisto Virranvälkkeen kalenterista. Puhelu, Teams tai Skype.") + header("ajanvaraus.html") + page_hero("Ajanvaraus", "Varaa maksuton alkukartoitus", "Valitse aihe, sinulle sopiva aika ja jätä yhteystietosi. Noin 15 minuutin selvittämistapaaminen ei maksa mitään eikä sido sinua mihinkään.") + '''
+<section class="section">
+  <div class="container booking-layout">
+    <div>
+      <form class="booking" id="booking-form" novalidate>
+        <div class="bk-step">
+          <div class="bk-step-head"><span class="step-num">1</span><div><h2>Mistä asiasta on kyse?</h2><p>Valinta auttaa meitä valmistautumaan keskusteluun.</p></div></div>
+          <div class="choices">''' + "".join(choice("topic", t, t, s) for t, s in TOPICS) + '''</div>
+        </div>
+        <div class="bk-step">
+          <div class="bk-step-head"><span class="step-num">2</span><div><h2>Miten haluat tavata?</h2><p>Kaikki vaihtoehdot ovat luottamuksellisia.</p></div></div>
+          <div class="choices choices-3">''' + "".join(choice("method", t, t, s) for t, s in METHODS) + '''</div>
+        </div>
+        <div class="bk-step">
+          <div class="bk-step-head"><span class="step-num">3</span><div><h2>Valitse päivä ja aika</h2><p>Ajat maanantaista perjantaihin klo 9.00–17.30.</p></div></div>
+          <div class="cal-wrap">
+            <div class="cal">
+              <div class="cal-head">
+                <button type="button" class="cal-nav" data-cal="-1" aria-label="Edellinen kuukausi">&lsaquo;</button>
+                <strong id="cal-title" aria-live="polite"></strong>
+                <button type="button" class="cal-nav" data-cal="1" aria-label="Seuraava kuukausi">&rsaquo;</button>
+              </div>
+              <div class="cal-week" aria-hidden="true"><span>ma</span><span>ti</span><span>ke</span><span>to</span><span>pe</span><span>la</span><span>su</span></div>
+              <div class="cal-grid" id="cal-grid"></div>
+            </div>
+            <div class="slots-wrap">
+              <p class="slots-title" id="slots-title">Valitse ensin päivä kalenterista.</p>
+              <div class="slots" id="slots" aria-live="polite"></div>
+            </div>
+          </div>
+          <p class="bk-note">Demo: vapaat ja varatut ajat ovat esimerkkejä, eivät oikea kalenteri.</p>
+        </div>
+        <div class="bk-step">
+          <div class="bk-step-head"><span class="step-num">4</span><div><h2>Yhteystietosi</h2><p>Tarvitsemme ne vahvistusta ja yhteydenottoa varten.</p></div></div>
+          <div class="fields-2">
+            <div class="field"><label for="b-name">Nimi *</label><input id="b-name" name="name" type="text" required autocomplete="name"></div>
+            <div class="field"><label for="b-phone">Puhelin *</label><input id="b-phone" name="phone" type="tel" required autocomplete="tel"></div>
+          </div>
+          <div class="field"><label for="b-email">Sähköposti *</label><input id="b-email" name="email" type="email" required autocomplete="email"></div>
+          <div class="field"><label for="b-msg">Kerro asiasi lyhyesti (vapaaehtoinen)</label><textarea id="b-msg" name="message" rows="3"></textarea></div>
+          <label class="check"><input type="checkbox" required><span>Hyväksyn henkilötietojeni käsittelyn <a href="tietosuojaseloste.html">tietosuojaselosteen</a> mukaisesti. *</span></label>
+          <p class="bk-error" id="bk-error" role="alert" hidden></p>
+          <button class="btn btn-gold" type="submit">Vahvista varaus</button>
+          <p class="form-demo">Demo: varausta ei tallenneta eikä kalenterikutsua lähetetä.</p>
+        </div>
+      </form>
+      <div class="booking booking-done" id="booking-done" hidden>
+        <span class="inc-icon">''' + ICON["check"] + '''</span>
+        <h2>Aika varattu! (demo)</h2>
+        <p>Olemme varanneet sinulle ajan <strong id="done-time"></strong>. Oikeassa versiossa saisit vahvistuksen ja kalenterikutsun sähköpostiisi osoitteeseen <strong id="done-email"></strong>.</p>
+        <p class="muted">Tämä on esittelyversio: mitään ei tallennettu eikä lähetetty.</p>
+        <button class="btn btn-outline btn-sm" type="button" data-booking-reset>Varaa toinen aika</button>
+      </div>
+    </div>
+    <aside class="order-card reveal bk-summary">
+      <div class="order-head">
+        <span class="badge">Maksuton</span>
+        <h3>Varauksesi</h3>
+        <p class="muted">Yhteenveto päivittyy valintojesi mukaan.</p>
+      </div>
+      <dl class="bk-dl">
+        <dt>Aihe</dt><dd id="s-topic">–</dd>
+        <dt>Tapa</dt><dd id="s-method">–</dd>
+        <dt>Aika</dt><dd id="s-time">–</dd>
+        <dt>Kesto</dt><dd>noin 15 min</dd>
+        <dt>Hinta</dt><dd>0 €</dd>
+      </dl>
+      <div class="bk-info">
+        <p><strong>Eikö sopivaa aikaa löydy?</strong> Soita <a href="tel:+358505598200">+358 50 559 8200</a> (ma–pe 9–18) tai <a href="yhteydenotto.html">jätä yhteydenottopyyntö</a>, niin etsimme ajan yhdessä.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+''' + FOOTER
+
 pages = {
   "index.html": index,
+  "ajanvaraus.html": booking,
   "tietoa-meista.html": about,
   "tiimimme.html": team,
   "yhteydenotto.html": contact,

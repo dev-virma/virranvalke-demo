@@ -10,7 +10,8 @@ ne näyttävät vain ilmoituksen. Jokaisen sivun yläreunassa on demo-banneri.
 
 | Tiedosto | Sisältö |
 |---|---|
-| `index.html` | Etusivu: palvelut, minidigikurssit, asioinnin eteneminen, yhteydenotto-CTA |
+| `index.html` | Etusivu: palvelut, minidigikurssit, asioinnin eteneminen, UKK ja esimerkkipalaute, yhteydenotto-CTA |
+| `ajanvaraus.html` | Ajanvaraus: aihe, tapaamistapa, kalenteri ja ajat, yhteystiedot (demo) |
 | `tietoa-meista.html` | Yrityksen esittely ja laskutushinnat |
 | `tiimimme.html` | Tiimi ja avoimet paikat |
 | `yhteydenotto.html` | Yhteystiedot ja yhteydenottolomake (demo) |
@@ -40,7 +41,7 @@ Vaihtoehtoiset konseptit B ja C poistettiin demosta; ne löytyvät git-historias
 ## Rakenne
 
 - `assets/style.css` – kaikki tyylit (ei frameworkia, ei build-vaihetta)
-- `assets/main.js` – mobiilivalikko, demo-evästebanneri ja demo-lomake
+- `assets/main.js` – mobiilivalikko, demo-evästebanneri, demo-lomakkeet ja ajanvarauksen kalenteri
 - `build.py` – generoi HTML-sivut yhteisellä headerilla ja footerilla
 
 HTML-sivut on generoitu skriptillä. Jos muokkaat sisältöä, tee muutos `build.py`-tiedostoon ja aja:
@@ -64,3 +65,5 @@ ja avaa http://localhost:8787/.
   (`assets/img/olli-virmajoki-400.jpg`); alkuperäinen 960 px kuva on tallessa samassa kansiossa.
   Avoimilla paikoilla on kuvan tilalla kysymysmerkki.
 - Minidigikurssien linkit vievät alkuperäiseen Campwire-kauppaan.
+- Ajanvarauksen kalenteri ja vapaat ajat ovat esimerkkejä: varatut ajat arvotaan deterministisesti,
+  eikä varausta tallenneta. Etusivun asiakaspalaute on keksitty esimerkki, ja se on merkitty sellaiseksi.

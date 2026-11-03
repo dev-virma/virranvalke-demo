@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=12">
+<link rel="stylesheet" href="assets/style.css?v=13">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23122441'/%3E%3Cpath d='M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20' fill='none' stroke='%23d6b86a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z' fill='%23e9d9b5'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -26,7 +26,7 @@
     <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <nav class="nav" id="nav"><a href="index.html" aria-current="page">Koti</a><a href="index.html#palvelut">Palvelut</a><a href="index.html#kurssit">Kurssit</a><a href="tietoa-meista.html">Tietoa meistä</a><a href="tiimimme.html">Tiimimme</a><a href="yhteydenotto.html">Yhteydenotto</a><a class="btn btn-gold btn-sm" href="tel:+358505598200"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> 050 559 8200</a></nav>
+    <nav class="nav" id="nav"><a href="index.html" aria-current="page">Koti</a><a href="index.html#palvelut">Palvelut</a><a href="index.html#kurssit">Kurssit</a><a href="tietoa-meista.html">Tietoa meistä</a><a href="tiimimme.html">Tiimimme</a><a href="yhteydenotto.html">Yhteydenotto</a><a class="btn btn-gold btn-sm" href="ajanvaraus.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M8 14h3"/><path d="M13 14h3"/></svg> Varaa aika</a></nav>
   </div>
 </header>
 <main id="main">
@@ -57,7 +57,7 @@
       <h1>Lakiasiantuntijat <em>palveluksessasi</em></h1>
       <p class="lead">Palvelemme yrityksiä ja yksityishenkilöitä työ-, yritys-, perhe- ja vero-oikeudellisissa kysymyksissä. Nykyaikainen online-virtuaalitoimisto, jossa asiat hoidetaan tehokkaasti ja luottamuksellisesti.</p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
+        <a class="btn btn-gold" href="ajanvaraus.html">Varaa maksuton aika</a>
         <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
       </div>
       <div class="hero-facts">
@@ -168,7 +168,7 @@
       <div class="eyebrow">Näin asiointi etenee</div>
       <h2>Selkeä polku ensimmäisestä yhteydenotosta ratkaisuun</h2>
       <ol class="steps">
-        <li><span class="step-num">1</span><div><strong>Ilmainen selvittämistapaaminen</strong><p>Noin 15 minuutin keskustelu, jossa käymme asiasi läpi ja arvioimme, miten sitä kannattaa viedä eteenpäin.</p></div></li>
+        <li><span class="step-num">1</span><div><strong>Ilmainen selvittämistapaaminen</strong><p>Noin 15 minuutin keskustelu, jossa käymme asiasi läpi ja arvioimme, miten sitä kannattaa viedä eteenpäin. <a href="ajanvaraus.html">Varaa aika kalenterista</a>.</p></div></li>
         <li><span class="step-num">2</span><div><strong>Sovitaan hinnoittelusta</strong><p>Tuntihinta tai palvelukohtainen kiinteä hinta, jota ei ylitetä ilman erillistä sopimista kanssasi.</p></div></li>
         <li><span class="step-num">3</span><div><strong>Asia hoidetaan</strong><p>Palaverit verkossa Skype- tai Teams-yhteyksin. Henkilökohtaiset tapaamiset sovitaan erikseen luottamuksellisessa paikassa.</p></div></li>
       </ol>
@@ -187,14 +187,41 @@
     </aside>
   </div>
 </section>
+
+<section class="section faq" id="ukk">
+  <div class="container faq-layout">
+    <div class="reveal">
+      <div class="eyebrow">Usein kysytyt kysymykset</div>
+      <h2>Vastauksia yleisimpiin kysymyksiin</h2>
+      <p class="muted faq-lead">Kokosimme vastaukset kysymyksiin, joita asiakkaamme kysyvät useimmin ennen ensimmäistä yhteydenottoa.</p>
+      <div class="faq-list"><details><summary>Mitä ilmainen alkukartoitus sisältää?</summary><div class="faq-body"><p>Noin 15 minuutin puhelu tai videopalaveri, jossa käymme asiasi pääkohdat läpi. Kerromme, kannattaako asiaa viedä eteenpäin, mitä se vaatisi ja mitä se arviolta maksaisi. Kartoitus ei sido sinua mihinkään.</p><p><a href="ajanvaraus.html">Varaa aika suoraan kalenterista</a>.</p></div></details><details><summary>Paljonko palvelut maksavat?</summary><div class="faq-body"><p>Hinnoittelu perustuu tuntihintaan tai etukäteen sovittuun kiinteään hintaan, jota ei ylitetä ilman erillistä sopimista kanssasi. Hintaan vaikuttaa asian laajuus. Ajantasaiset tuntihinnat löydät <a href="tietoa-meista.html#hinnasto">hinnastosta</a>, ja kustannusarvion saat maksuttomassa alkukartoituksessa.</p></div></details><details><summary>Miten tapaamiset järjestetään, kun teillä ei ole toimitilaa?</summary><div class="faq-body"><p>Toimimme täysin verkossa. Neuvottelut hoidetaan puhelimitse tai Teams- ja Skype-yhteyksin, ja asiakirjat toimitetaan sähköisesti. Jos henkilökohtainen tapaaminen on tarpeen, sovimme sen erikseen luottamukselliseen paikkaan Joensuun seudulla tai pääkaupunkiseudulla.</p></div></details><details><summary>Mitä perunkirjoitukseen tarvitaan?</summary><div class="faq-body"><p>Perunkirjoitus on toimitettava kolmen kuukauden kuluessa kuolemasta. Tavallisesti tarvitaan:</p><ul><li>vainajan katkeamaton sukuselvitys ja kuolinpesän osakkaiden virkatodistukset</li><li>pankkien saldo- ja arvotodistukset kuolinpäivältä</li><li>tiedot muusta omaisuudesta ja veloista, kuten asunnosta, autosta, lainoista ja maksamattomista laskuista</li><li>mahdollinen testamentti, avioehtosopimus ja aiemmin kuolleen puolison perukirja</li></ul><p>Autamme asiakirjojen kokoamisessa. Jos haluat laatia perukirjan itse, <a href="kurssi-perukirja.html">minidigikurssi</a> opastaa askel askeleelta.</p></div></details><details><summary>Mitä eroa on edunvalvontavaltakirjalla ja edunvalvonnalla?</summary><div class="faq-body"><p>Edunvalvontavaltakirjalla valitset itse etukäteen henkilön, joka hoitaa asioitasi, jos et myöhemmin itse siihen kykene. Valtakirja tulee voimaan vasta, kun Digi- ja väestötietovirasto vahvistaa sen lääkärinlausunnon perusteella.</p><p>Edunvalvonta on viranomaisen tai tuomioistuimen määräämä järjestely, jossa edunvalvojaa ei välttämättä valitse itse ja jonka toimintaa valvotaan tiukemmin. Valtakirja on yleensä joustavampi ja edullisempi vaihtoehto.</p></div></details><details><summary>Tarvitsenko testamentin, jos minulla on puoliso ja lapset?</summary><div class="faq-body"><p>Ilman testamenttia omaisuus jaetaan perintökaaren mukaan. Testamentilla voit muun muassa turvata puolison asemaa laajemmin kuin laki edellyttää, määrätä että perintö ei kuulu lastesi puolisoiden avio-oikeuden piiriin ja keventää perintöverotusta esimerkiksi hallintaoikeusmääräyksellä.</p><p>Testamentti on tehtävä kirjallisesti kahden esteettömän todistajan läsnä ollessa. <a href="kurssi-testamentti.html">Testamenttikurssilla</a> voit laatia sen itse.</p></div></details><details><summary>Palveletteko muualla kuin Joensuussa?</summary><div class="faq-body"><p>Kyllä. Koska toimimme verkossa, voimme palvella asiakkaita koko Suomessa. Toiminta-alueemme on ensisijaisesti Joensuun seutu ja tarvittaessa pääkaupunkiseutu, mutta etäyhteydet tekevät sijainnista toissijaisen.</p></div></details><details><summary>Miten tietoni pysyvät luottamuksellisina?</summary><div class="faq-body"><p>Lakimiestä sitoo salassapitovelvollisuus. Asiakirjat käsitellään suojatuissa yhteyksissä, ja henkilötietoja käsitellään <a href="tietosuojaseloste.html">tietosuojaselosteen</a> mukaisesti.</p></div></details></div>
+      <p class="muted">Etkö löytänyt vastausta? <a href="ajanvaraus.html">Varaa maksuton alkukartoitus</a> tai <a href="yhteydenotto.html">lähetä kysymys lomakkeella</a>.</p>
+    </div>
+    <div class="faq-aside">
+      <figure class="testimonial reveal">
+        <div class="stars" aria-label="Arvosana 5/5">★★★★★</div>
+        <blockquote>Isäni kuoleman jälkeen perunkirjoitus tuntui ylivoimaiselta. Olli kävi kanssani läpi, mitä papereita tarvitaan, hoiti perukirjan ajallaan ja selitti jokaisen vaiheen niin, että ymmärsin ne. Teams-palaverit sopivat meille hyvin, kun sisarukset asuvat eri puolilla Suomea.</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">MK</span><div><strong>Marja K., Joensuu</strong><span>Perunkirjoitus ja perinnönjako</span></div></figcaption>
+        <p class="demo-tag">Esimerkkipalaute demoa varten, ei oikean asiakkaan antama.</p>
+      </figure>
+      <aside class="aside reveal">
+        <div class="eyebrow">Ajanvaraus</div>
+        <h3>Varaa maksuton 15 minuutin alkukartoitus</h3>
+        <p class="muted">Valitse sopiva aika kalenterista. Soitamme sinulle tai lähetämme Teams-kutsun.</p>
+        <a class="btn btn-primary btn-sm" href="ajanvaraus.html">Varaa aika</a>
+      </aside>
+    </div>
+  </div>
+</section>
 <section class="cta">
   <div class="container">
     <div>
       <h2>Ensimmäinen konsultaatio on ilmainen</h2>
-      <p>Noin 15 minuutin toimeksiannon selvittämistapaaminen ei maksa mitään. Soita tai jätä yhteydenottopyyntö.</p>
+      <p>Noin 15 minuutin toimeksiannon selvittämistapaaminen ei maksa mitään. Varaa aika kalenterista, soita tai jätä yhteydenottopyyntö.</p>
     </div>
     <div class="hero-actions">
-      <a class="btn btn-light" href="tel:+358505598200">Soita +358 50 559 8200</a>
+      <a class="btn btn-light" href="ajanvaraus.html">Varaa maksuton aika</a>
+      <a class="btn btn-outline-light" href="tel:+358505598200">Soita +358 50 559 8200</a>
       <a class="btn btn-outline-light" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
     </div>
   </div>
@@ -214,12 +241,14 @@
           <li><a href="tel:+358505598200">+358 50 559 8200</a></li>
           <li><a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a></li>
           <li><a href="yhteydenotto.html">Yhteydenottolomake</a></li>
+          <li><a href="ajanvaraus.html">Ajanvaraus</a></li>
         </ul>
       </div>
       <div>
         <h4>Sivusto</h4>
         <ul>
           <li><a href="index.html#kurssit">Minidigikurssit</a></li>
+          <li><a href="index.html#ukk">Usein kysytyt kysymykset</a></li>
           <li><a href="tietoa-meista.html">Tietoa meistä</a></li>
           <li><a href="tiimimme.html">Tiimimme</a></li>
           <li><a href="tietosuojaseloste.html">Tietosuojaseloste</a></li>
@@ -243,6 +272,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=6"></script>
+<script src="assets/main.js?v=7"></script>
 </body>
 </html>
