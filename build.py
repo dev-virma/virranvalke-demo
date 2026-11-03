@@ -41,6 +41,32 @@ TRUST = '''<section class="trust" aria-label="Lyhyesti">
 </section>
 '''
 
+def wave_path(y, amp, width=1600, period=200):
+    """Jaksollinen aaltopolku, jonka jakso on `period`, jotta animaatio kiertää saumattomasti."""
+    half = period / 2
+    d = f"M0 {y} Q{half/2:.0f} {y-amp} {half:.0f} {y}"
+    x = half
+    while x < width + period:
+        d += f" T{x+half:.0f} {y}"
+        x += half
+    return d
+
+HERO_BG = '''<div class="hero-bg" aria-hidden="true">
+  <svg class="waves" viewBox="0 0 1600 200" preserveAspectRatio="none">
+    <path class="wave" d="''' + wave_path(120, 18) + '''"/>
+    <path class="wave" d="''' + wave_path(150, 14) + '''"/>
+    <path class="wave" d="''' + wave_path(178, 10) + '''"/>
+  </svg>
+''' + "".join(
+    f'  <span class="spark" style="--x:{x}%;--y:{y}%;--d:{d}s;--dl:{dl}s;--s:{s}"></span>\n'
+    for x, y, d, dl, s in [
+        (8, 22, 4.2, 0.0, 1.0), (19, 68, 5.1, 1.3, 0.7), (31, 14, 3.8, 2.1, 0.8), (44, 80, 4.6, 0.6, 1.1),
+        (57, 30, 5.4, 1.8, 0.6), (66, 62, 4.0, 2.6, 0.9), (78, 18, 4.8, 0.9, 1.2), (87, 74, 3.6, 1.5, 0.7),
+        (93, 42, 5.0, 2.9, 0.9), (26, 46, 4.4, 3.4, 0.6), (72, 88, 4.1, 2.3, 0.8), (50, 54, 3.9, 0.3, 0.5),
+    ]
+) + '''</div>
+'''
+
 def head(title, desc):
     return f'''<!DOCTYPE html>
 <html lang="fi">
@@ -53,7 +79,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=2">
+<link rel="stylesheet" href="assets/style.css?v=4">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
@@ -118,7 +144,7 @@ FOOTER = '''<footer class="site-footer">
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=2"></script>
+<script src="assets/main.js?v=3"></script>
 </body>
 </html>
 '''
@@ -171,8 +197,8 @@ def course(title, desc, price, url):
 
 # ---------- ETUSIVU ----------
 index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, työ-, perhe- ja vero-oikeus sekä sosiaaliturva-asiat. Joensuu ja pääkaupunkiseutu.") + header("index.html") + '''
-<section class="hero">
-  <div class="container hero-grid">
+<section class="hero" id="hero">
+''' + HERO_BG + '''  <div class="container hero-grid">
     <div class="hero-copy">
       <div class="eyebrow">Lakiasiaintoimisto Virranvälke · Joensuu</div>
       <h1>Lakiasiantuntijat <em>palveluksessasi</em></h1>
@@ -182,9 +208,9 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
         <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
       </div>
       <div class="hero-facts">
-        <div class="fact"><strong>2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
-        <div class="fact"><strong>4</strong><span>Osaamisaluetta yrityksille ja yksityisille</span></div>
-        <div class="fact"><strong>0 €</strong><span>Ensimmäinen 15 min selvittämistapaaminen</span></div>
+        <div class="fact"><strong data-count="2020" data-from="1980">2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
+        <div class="fact"><strong data-count="4">4</strong><span>Osaamisaluetta yrityksille ja yksityisille</span></div>
+        <div class="fact"><strong data-count="15" data-suffix=" min">15 min</strong><span>Ensimmäinen selvittämistapaaminen on ilmainen</span></div>
       </div>
     </div>
     <aside class="hero-card">

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=2">
+<link rel="stylesheet" href="assets/style.css?v=4">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23122441'/%3E%3Cpath d='M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20' fill='none' stroke='%23d6b86a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z' fill='%23e9d9b5'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -24,7 +24,26 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="hero">
+<div class="hero-bg" aria-hidden="true">
+  <svg class="waves" viewBox="0 0 1600 200" preserveAspectRatio="none">
+    <path class="wave" d="M0 120 Q50 102 100 120 T200 120 T300 120 T400 120 T500 120 T600 120 T700 120 T800 120 T900 120 T1000 120 T1100 120 T1200 120 T1300 120 T1400 120 T1500 120 T1600 120 T1700 120 T1800 120"/>
+    <path class="wave" d="M0 150 Q50 136 100 150 T200 150 T300 150 T400 150 T500 150 T600 150 T700 150 T800 150 T900 150 T1000 150 T1100 150 T1200 150 T1300 150 T1400 150 T1500 150 T1600 150 T1700 150 T1800 150"/>
+    <path class="wave" d="M0 178 Q50 168 100 178 T200 178 T300 178 T400 178 T500 178 T600 178 T700 178 T800 178 T900 178 T1000 178 T1100 178 T1200 178 T1300 178 T1400 178 T1500 178 T1600 178 T1700 178 T1800 178"/>
+  </svg>
+  <span class="spark" style="--x:8%;--y:22%;--d:4.2s;--dl:0.0s;--s:1.0"></span>
+  <span class="spark" style="--x:19%;--y:68%;--d:5.1s;--dl:1.3s;--s:0.7"></span>
+  <span class="spark" style="--x:31%;--y:14%;--d:3.8s;--dl:2.1s;--s:0.8"></span>
+  <span class="spark" style="--x:44%;--y:80%;--d:4.6s;--dl:0.6s;--s:1.1"></span>
+  <span class="spark" style="--x:57%;--y:30%;--d:5.4s;--dl:1.8s;--s:0.6"></span>
+  <span class="spark" style="--x:66%;--y:62%;--d:4.0s;--dl:2.6s;--s:0.9"></span>
+  <span class="spark" style="--x:78%;--y:18%;--d:4.8s;--dl:0.9s;--s:1.2"></span>
+  <span class="spark" style="--x:87%;--y:74%;--d:3.6s;--dl:1.5s;--s:0.7"></span>
+  <span class="spark" style="--x:93%;--y:42%;--d:5.0s;--dl:2.9s;--s:0.9"></span>
+  <span class="spark" style="--x:26%;--y:46%;--d:4.4s;--dl:3.4s;--s:0.6"></span>
+  <span class="spark" style="--x:72%;--y:88%;--d:4.1s;--dl:2.3s;--s:0.8"></span>
+  <span class="spark" style="--x:50%;--y:54%;--d:3.9s;--dl:0.3s;--s:0.5"></span>
+</div>
   <div class="container hero-grid">
     <div class="hero-copy">
       <div class="eyebrow">Lakiasiaintoimisto Virranvälke · Joensuu</div>
@@ -35,9 +54,9 @@
         <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
       </div>
       <div class="hero-facts">
-        <div class="fact"><strong>2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
-        <div class="fact"><strong>4</strong><span>Osaamisaluetta yrityksille ja yksityisille</span></div>
-        <div class="fact"><strong>0 €</strong><span>Ensimmäinen 15 min selvittämistapaaminen</span></div>
+        <div class="fact"><strong data-count="2020" data-from="1980">2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
+        <div class="fact"><strong data-count="4">4</strong><span>Osaamisaluetta yrityksille ja yksityisille</span></div>
+        <div class="fact"><strong data-count="15" data-suffix=" min">15 min</strong><span>Ensimmäinen selvittämistapaaminen on ilmainen</span></div>
       </div>
     </div>
     <aside class="hero-card">
@@ -211,6 +230,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=2"></script>
+<script src="assets/main.js?v=3"></script>
 </body>
 </html>

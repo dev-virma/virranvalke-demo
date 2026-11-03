@@ -69,6 +69,45 @@
     onScroll();
   }
 
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero: hiiren mukana liikkuva parallaksi (vesileima ja yhteystietokortti)
+  var hero = document.getElementById('hero');
+  var heroCard = hero && hero.querySelector('.hero-card');
+  if (hero && !reduceMotion) {
+    if (heroCard) {
+      heroCard.addEventListener('animationend', function () { heroCard.classList.add('settled'); }, { once: true });
+    }
+    hero.addEventListener('mousemove', function (ev) {
+      var r = hero.getBoundingClientRect();
+      var mx = ((ev.clientX - r.left) / r.width - 0.5) * 2;
+      var my = ((ev.clientY - r.top) / r.height - 0.5) * 2;
+      hero.style.setProperty('--mx', mx.toFixed(3));
+      hero.style.setProperty('--my', my.toFixed(3));
+    });
+    hero.addEventListener('mouseleave', function () {
+      hero.style.setProperty('--mx', '0');
+      hero.style.setProperty('--my', '0');
+    });
+  }
+
+  // Lukujen laskuri heron avainluvuissa
+  document.querySelectorAll('[data-count]').forEach(function (el) {
+    var to = parseInt(el.getAttribute('data-count'), 10);
+    var from = parseInt(el.getAttribute('data-from') || '0', 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduceMotion || isNaN(to)) { el.textContent = to + suffix; return; }
+    var start = null, dur = 1400;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * eased) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    setTimeout(function () { requestAnimationFrame(step); }, 500);
+  });
+
   // Sisällön pehmeä ilmestyminen vieritettäessä
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && reveals.length) {
