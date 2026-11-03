@@ -20,10 +20,21 @@ BRAND_MARK = '''<svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><
 
 NAV = [
   ("index.html", "Koti"),
+  ("index.html#palvelut", "Palvelut"),
   ("tietoa-meista.html", "Tietoa meistä"),
   ("tiimimme.html", "Tiimimme"),
-  ("tietosuojaseloste.html", "Tietosuojaseloste"),
+  ("yhteydenotto.html", "Yhteydenotto"),
 ]
+
+TRUST = '''<section class="trust" aria-label="Lyhyesti">
+  <div class="container trust-grid">
+    <div class="trust-item"><span class="trust-icon">''' + ICON["clock"] + '''</span><div><strong>Ensimmäiset 15 min ilmaiseksi</strong><span>Toimeksiannon selvittämistapaaminen ei maksa mitään</span></div></div>
+    <div class="trust-item"><span class="trust-icon">''' + ICON["scale"] + '''</span><div><strong>Kiinteä hinta mahdollinen</strong><span>Palvelukohtainen hinta, jota ei ylitetä sopimatta</span></div></div>
+    <div class="trust-item"><span class="trust-icon">''' + ICON["video"] + '''</span><div><strong>Online-virtuaalitoimisto</strong><span>Palaverit Skype- ja Teams-yhteyksin</span></div></div>
+    <div class="trust-item"><span class="trust-icon">''' + ICON["pin"] + '''</span><div><strong>Joensuu ja pääkaupunkiseutu</strong><span>Toiminta-alue ensisijaisesti Joensuun seutu</span></div></div>
+  </div>
+</section>
+'''
 
 def head(title, desc):
     return f'''<!DOCTYPE html>
@@ -37,7 +48,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23122441'/%3E%3Cpath d='M9 12l7 16 4-9 4 9 7-16' fill='none' stroke='%23e9d9b5' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -55,7 +66,7 @@ def header(current):
     <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <nav class="nav" id="nav">{links}<a class="btn btn-gold btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></nav>
+    <nav class="nav" id="nav">{links}<a class="btn btn-gold btn-sm" href="tel:+358505598200">{ICON["phone"]} 050 559 8200</a></nav>
   </div>
 </header>
 '''
@@ -64,8 +75,9 @@ FOOTER = '''<footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <h4>Lakiasiaintoimisto Virranvälke</h4>
-        <p>Y-tunnus 3192420-6<br>Joensuu<br>Online-virtuaalitoimisto, tapaamiset sopimuksen mukaan.</p>
+        <a class="brand brand-footer" href="index.html">''' + BRAND_MARK + '''<span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
+        <p>Lakiasiantuntijat palveluksessasi. Online-virtuaalitoimisto Joensuusta, tapaamiset sopimuksen mukaan.</p>
+        <p class="footer-meta">Y-tunnus 3192420-6</p>
       </div>
       <div>
         <h4>Yhteystiedot</h4>
@@ -101,7 +113,7 @@ FOOTER = '''<footer class="site-footer">
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js"></script>
+<script src="assets/main.js?v=2"></script>
 </body>
 </html>
 '''
@@ -109,7 +121,7 @@ FOOTER = '''<footer class="site-footer">
 def page_hero(eyebrow, title, text):
     return f'''<section class="page-hero">
   <div class="container">
-    <div class="eyebrow">{eyebrow}</div>
+    <nav class="crumbs" aria-label="Murupolku"><a href="index.html">Koti</a><span>/</span><span>{eyebrow}</span></nav>
     <h1>{title}</h1>
     <p>{text}</p>
   </div>
@@ -131,10 +143,11 @@ CTA = '''<section class="cta">
 '''
 
 def service(icon, title, tagline, intro, items, forums):
+    service.n = getattr(service, "n", 0) + 1
     lis = "".join(f"<li>{i}</li>" for i in items)
     tags = "".join(f'<span class="tag">{f}</span>' for f in forums)
-    return f'''<article class="card">
-  <div class="icon">{ICON[icon]}</div>
+    return f'''<article class="card service reveal">
+  <div class="card-top"><div class="icon">{ICON[icon]}</div><span class="card-num">0{service.n}</span></div>
   <h3>{title}</h3>
   <p class="tagline">{tagline}</p>
   <p>{intro}</p>
@@ -143,7 +156,7 @@ def service(icon, title, tagline, intro, items, forums):
 </article>'''
 
 def course(title, desc, price, url):
-    return f'''<article class="card course">
+    return f'''<article class="card course reveal">
   <span class="badge">Lanseeraushinta</span>
   <h3>{title}</h3>
   <p>{desc}</p>
@@ -154,22 +167,36 @@ def course(title, desc, price, url):
 # ---------- ETUSIVU ----------
 index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, työ-, perhe- ja vero-oikeus sekä sosiaaliturva-asiat. Joensuu ja pääkaupunkiseutu.") + header("index.html") + '''
 <section class="hero">
-  <div class="container">
-    <div class="eyebrow">Lakiasiaintoimisto Virranvälke · Joensuu</div>
-    <h1>Lakiasiantuntijat palveluksessasi</h1>
-    <p class="lead">Palvelemme yrityksiä ja yksityishenkilöitä työ-, yritys-, perhe- ja vero-oikeudellisissa kysymyksissä. Nykyaikainen online-virtuaalitoimisto, jossa asiat hoidetaan tehokkaasti ja luottamuksellisesti.</p>
-    <div class="hero-actions">
-      <a class="btn btn-gold" href="yhteydenotto.html">Ota yhteyttä</a>
-      <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Lakiasiaintoimisto Virranvälke · Joensuu</div>
+      <h1>Lakiasiantuntijat <em>palveluksessasi</em></h1>
+      <p class="lead">Palvelemme yrityksiä ja yksityishenkilöitä työ-, yritys-, perhe- ja vero-oikeudellisissa kysymyksissä. Nykyaikainen online-virtuaalitoimisto, jossa asiat hoidetaan tehokkaasti ja luottamuksellisesti.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
+        <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
+      </div>
+      <div class="hero-facts">
+        <div class="fact"><strong>2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
+        <div class="fact"><strong>4</strong><span>Osaamisaluetta yrityksille ja yksityisille</span></div>
+        <div class="fact"><strong>0 €</strong><span>Ensimmäinen 15 min selvittämistapaaminen</span></div>
+      </div>
     </div>
-    <div class="hero-facts">
-      <div class="fact"><strong>15 min</strong><span>Ensimmäinen selvittämistapaaminen on ilmainen</span></div>
-      <div class="fact"><strong>2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
-      <div class="fact"><strong>Online</strong><span>Palaverit Skype- ja Teams-yhteyksin, tapaamiset sopimuksen mukaan</span></div>
-    </div>
+    <aside class="hero-card">
+      <div class="hero-card-head">
+        <span class="eyebrow">Ota yhteyttä</span>
+        <h3>Ensimmäinen konsultaatio on ilmainen</h3>
+      </div>
+      <ul class="hero-card-list">
+        <li>''' + ICON["phone"] + '''<div><strong><a href="tel:+358505598200">+358 50 559 8200</a></strong><span>Ma–pe 9.00–18.00</span></div></li>
+        <li>''' + ICON["mail"] + '''<div><strong><a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a></strong><span>Vastaamme niin pian kuin voimme</span></div></li>
+        <li>''' + ICON["video"] + '''<div><strong>Skype ja Teams</strong><span>Tapaamiset sovitaan erikseen luottamuksellisessa paikassa</span></div></li>
+      </ul>
+      <a class="btn btn-primary" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
+    </aside>
   </div>
 </section>
-
+''' + TRUST + '''
 <section class="section" id="palvelut">
   <div class="container">
     <div class="section-head">
@@ -209,9 +236,9 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
   </div>
 </section>
 
-<section class="section">
+<section class="section process">
   <div class="container split">
-    <div class="prose">
+    <div class="prose reveal">
       <div class="eyebrow">Näin asiointi etenee</div>
       <h2>Selkeä polku ensimmäisestä yhteydenotosta ratkaisuun</h2>
       <ol class="steps">
@@ -221,12 +248,12 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
       </ol>
       <a class="btn btn-outline" href="tietoa-meista.html#hinnasto">Katso hinnasto</a>
     </div>
-    <aside class="aside">
+    <aside class="aside aside-dark reveal">
       <div class="eyebrow">Tietoa meistä</div>
       <h3>Online-virtuaalitoimisto Joensuusta</h3>
       <p class="muted">Lakiasiaintoimisto Virranvälke aloitti toimintansa maaliskuussa 2020 ja palvelee asiakkaitaan täysin verkossa ilman kiinteää toimitilaa. Toiminta-alue on ensisijaisesti Joensuun seutu, tarvittaessa myös pääkaupunkiseutu.</p>
       <p class="muted">Toimintaa johtaa lakimies, OTM <strong>Olli Virmajoki</strong>. Yritys myös kokeilee ja hyödyntää tekoälyä sekä asiakaspalvelussa että lakiasiainpalvelussa.</p>
-      <div class="hero-actions"><a class="btn btn-primary btn-sm" href="tietoa-meista.html">Lue lisää</a><a class="btn btn-outline btn-sm" href="tiimimme.html">Tiimimme</a></div>
+      <div class="hero-actions"><a class="btn btn-gold btn-sm" href="tietoa-meista.html">Lue lisää</a><a class="btn btn-outline-light btn-sm" href="tiimimme.html">Tiimimme</a></div>
     </aside>
   </div>
 </section>
@@ -234,7 +261,7 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
 
 # ---------- TIETOA MEISTÄ ----------
 def price_card(title, hourly, vat_line, extra=""):
-    return f'''<div class="price-card">
+    return f'''<div class="price-card reveal">
   <h3>{title}</h3>
   <div class="big">{hourly} €<small> / tunti (alv 0 %)</small></div>
   <div class="vat">{vat_line}</div>
@@ -293,17 +320,28 @@ about = head("Tietoa meistä", "Lakiasiaintoimisto Virranvälke on vuonna 2020 p
 team = head("Tiimimme", "Olemme sitoutuneet auttamaan sinua. Tutustu Lakiasiaintoimisto Virranvälkkeen tiimiin.") + header("tiimimme.html") + page_hero("Tiimimme", "Olemme sitoutuneet auttamaan sinua", "Kokenut lakimies ja kasvava tiimi. Etsimme joukkoomme uusia osaajia.") + '''
 <section class="section">
   <div class="container">
-    <div class="grid team">
-      <article class="card person">
-        <div class="avatar" aria-hidden="true">OV</div>
+    <article class="card person featured reveal">
+      <div class="featured-side">
+        <div class="avatar avatar-lg" aria-hidden="true">OV</div>
         <h3>Olli Virmajoki</h3>
-        <p class="role">Toimitusjohtaja</p>
+        <p class="role">Toimitusjohtaja · Lakimies, OTM</p>
+        <div class="tags">
+          <span class="tag">Asianajaja-tutkinto 2019</span><span class="tag">DI</span><span class="tag">FL</span><span class="tag">FT</span><span class="tag">HTK</span><span class="tag">Opettajan ammatillinen tutkinto</span>
+        </div>
+      </div>
+      <div class="featured-body">
         <p>Olli on yrityksen perustajajäsen. Lakimies, OTM ja asianajaja-tutkinto vuonna 2019.</p>
         <p>Hänellä on laaja ja monipuolinen koulutus: DI, opettajan ammatillinen tutkinto, FL, FT ja HTK.</p>
         <p>Ollilla on monipuolinen työkokemus kattaen yritysmaailman, kunnallishallinnon sekä myös koulutussektorin, joissa hän on perehtynyt laajasti myös työelämän ongelmiin.</p>
-        <div class="tags"><a class="btn btn-outline btn-sm" href="http://cvapp.fi/r/H6uUn2Vmu" target="_blank" rel="noopener">Katso CV</a></div>
-      </article>
-      <article class="card person">
+        <div class="hero-actions"><a class="btn btn-primary btn-sm" href="http://cvapp.fi/r/H6uUn2Vmu" target="_blank" rel="noopener">Katso CV</a><a class="btn btn-outline btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></div>
+      </div>
+    </article>
+    <div class="section-head" style="margin-top:56px">
+      <div class="eyebrow">Avoimet paikat</div>
+      <h2>Etsimme tiimiimme uusia osaajia</h2>
+    </div>
+    <div class="grid grid-2">
+      <article class="card person reveal">
         <div class="avatar open" aria-hidden="true">?</div>
         <span class="open-badge">Avoin paikka</span>
         <h3>Hanna Eskola</h3>
@@ -311,7 +349,7 @@ team = head("Tiimimme", "Olemme sitoutuneet auttamaan sinua. Tutustu Lakiasiaint
         <p>Etsimme tiimiimme uutta ”Hannaa”.</p>
         <div class="tags"><a class="btn btn-outline btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></div>
       </article>
-      <article class="card person">
+      <article class="card person reveal">
         <div class="avatar open" aria-hidden="true">?</div>
         <span class="open-badge">Avoin paikka</span>
         <h3>Petri Korhonen</h3>
@@ -334,7 +372,7 @@ contact = head("Ota yhteyttä", "Ensimmäinen konsultaatio on ilmainen. Ota yhte
     <div class="info-list">
 ''' + info("pin", "Postiosoite", "Lakiasiaintoimisto Virranvälke<br>Torikatu 3 B 12, 80110 Joensuu") + info("video", "Tapaamiset", "Palvelemme sinua nykyaikaisena täysin puhtaana online-virtuaalitoimistona ilman kiinteää toimitilaa. Palaverit ja neuvottelut tapahtuvat verkossa Skype- ja Teams-yhteyksin. Kaikki tapaamiset sovitaan erikseen luottamuksellisessa paikassa tapahtuviksi.") + info("clock", "Aukioloajat", "Maanantai – perjantai 9.00 – 18.00") + info("phone", "Puhelin", '<a href="tel:+358505598200">+358 50 559 8200</a><br><span class="muted">+358 xxxxx xxxx (maksullinen puhelinneuvonta 4,00 € / minuutti)</span>') + info("mail", "Sähköposti", '<a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a>') + '''
     </div>
-    <form class="form" id="contact-form" novalidate>
+    <form class="form reveal" id="contact-form" novalidate>
       <h3>Jätä yhteydenottopyyntö</h3>
       <p class="hint">Ole hyvä ja jätä yhteystietosi niin otamme sinuun yhteyttä niin pian kuin voimme. (*) pakollinen kenttä.</p>
       <div class="field">

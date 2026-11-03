@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23122441'/%3E%3Cpath d='M9 12l7 16 4-9 4 9 7-16' fill='none' stroke='%23e9d9b5' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -20,24 +20,46 @@
     <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <nav class="nav" id="nav"><a href="index.html" aria-current="page">Koti</a><a href="tietoa-meista.html">Tietoa meistä</a><a href="tiimimme.html">Tiimimme</a><a href="tietosuojaseloste.html">Tietosuojaseloste</a><a class="btn btn-gold btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></nav>
+    <nav class="nav" id="nav"><a href="index.html" aria-current="page">Koti</a><a href="index.html#palvelut">Palvelut</a><a href="tietoa-meista.html">Tietoa meistä</a><a href="tiimimme.html">Tiimimme</a><a href="yhteydenotto.html">Yhteydenotto</a><a class="btn btn-gold btn-sm" href="tel:+358505598200"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> 050 559 8200</a></nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="container">
-    <div class="eyebrow">Lakiasiaintoimisto Virranvälke · Joensuu</div>
-    <h1>Lakiasiantuntijat palveluksessasi</h1>
-    <p class="lead">Palvelemme yrityksiä ja yksityishenkilöitä työ-, yritys-, perhe- ja vero-oikeudellisissa kysymyksissä. Nykyaikainen online-virtuaalitoimisto, jossa asiat hoidetaan tehokkaasti ja luottamuksellisesti.</p>
-    <div class="hero-actions">
-      <a class="btn btn-gold" href="yhteydenotto.html">Ota yhteyttä</a>
-      <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Lakiasiaintoimisto Virranvälke · Joensuu</div>
+      <h1>Lakiasiantuntijat <em>palveluksessasi</em></h1>
+      <p class="lead">Palvelemme yrityksiä ja yksityishenkilöitä työ-, yritys-, perhe- ja vero-oikeudellisissa kysymyksissä. Nykyaikainen online-virtuaalitoimisto, jossa asiat hoidetaan tehokkaasti ja luottamuksellisesti.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
+        <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
+      </div>
+      <div class="hero-facts">
+        <div class="fact"><strong>2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
+        <div class="fact"><strong>4</strong><span>Osaamisaluetta yrityksille ja yksityisille</span></div>
+        <div class="fact"><strong>0 €</strong><span>Ensimmäinen 15 min selvittämistapaaminen</span></div>
+      </div>
     </div>
-    <div class="hero-facts">
-      <div class="fact"><strong>15 min</strong><span>Ensimmäinen selvittämistapaaminen on ilmainen</span></div>
-      <div class="fact"><strong>2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
-      <div class="fact"><strong>Online</strong><span>Palaverit Skype- ja Teams-yhteyksin, tapaamiset sopimuksen mukaan</span></div>
-    </div>
+    <aside class="hero-card">
+      <div class="hero-card-head">
+        <span class="eyebrow">Ota yhteyttä</span>
+        <h3>Ensimmäinen konsultaatio on ilmainen</h3>
+      </div>
+      <ul class="hero-card-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><div><strong><a href="tel:+358505598200">+358 50 559 8200</a></strong><span>Ma–pe 9.00–18.00</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><strong><a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a></strong><span>Vastaamme niin pian kuin voimme</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg><div><strong>Skype ja Teams</strong><span>Tapaamiset sovitaan erikseen luottamuksellisessa paikassa</span></div></li>
+      </ul>
+      <a class="btn btn-primary" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
+    </aside>
+  </div>
+</section>
+<section class="trust" aria-label="Lyhyesti">
+  <div class="container trust-grid">
+    <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><strong>Ensimmäiset 15 min ilmaiseksi</strong><span>Toimeksiannon selvittämistapaaminen ei maksa mitään</span></div></div>
+    <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M8 21h8"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><div><strong>Kiinteä hinta mahdollinen</strong><span>Palvelukohtainen hinta, jota ei ylitetä sopimatta</span></div></div>
+    <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></span><div><strong>Online-virtuaalitoimisto</strong><span>Palaverit Skype- ja Teams-yhteyksin</span></div></div>
+    <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><strong>Joensuu ja pääkaupunkiseutu</strong><span>Toiminta-alue ensisijaisesti Joensuun seutu</span></div></div>
   </div>
 </section>
 
@@ -49,29 +71,29 @@
       <p>Tapaukset selvitetään tehokkaasti ja oikeutesi suojataan. Alla pääasialliset toimialueemme ja tuomioistuimet, joissa asioita hoidamme.</p>
     </div>
     <div class="grid grid-2">
-<article class="card">
-  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l4-4h4l3 3"/><path d="M21 11l-4-4h-3"/><path d="M7 14l3 3a2 2 0 0 0 3 0l1-1"/><path d="M10 11l3 3a2 2 0 0 0 3 0"/><path d="M3 11v5h3"/><path d="M21 11v5h-3"/></svg></div>
+<article class="card service reveal">
+  <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l4-4h4l3 3"/><path d="M21 11l-4-4h-3"/><path d="M7 14l3 3a2 2 0 0 0 3 0l1-1"/><path d="M10 11l3 3a2 2 0 0 0 3 0"/><path d="M3 11v5h3"/><path d="M21 11v5h-3"/></svg></div><span class="card-num">01</span></div>
   <h3>Yrityserimielisyydet</h3>
   <p class="tagline">Tapaukset selvitetään tehokkaasti</p>
   <p>Palvelemme yksityistämis- ja yhtiöittämiskysymyksissä.</p>
   <ul><li>Kunnan yhtiöittämiset</li><li>Osakassopimukset</li><li>Liikkeen luovutukset</li><li>Julkiset hankinnat</li></ul>
   <div class="tags"><span class="tag">Yleinen tuomioistuin</span><span class="tag">Markkinaoikeus</span></div>
-</article><article class="card">
-  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div>
+</article><article class="card service reveal">
+  <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div><span class="card-num">02</span></div>
   <h3>Työllisyyserimielisyydet</h3>
   <p class="tagline">Työsuhdeoikeutesi suojataan</p>
   <p>Palvelemme työ- ja virkamiesoikeudellisissa kysymyksissä.</p>
   <ul><li>Yhteistoimintamenettelyt</li><li>Lomautukset</li><li>Palvelussuhteen päättämiset</li><li>Työsopimukset</li><li>Liikkeen luovutukset</li></ul>
   <div class="tags"><span class="tag">Yleinen tuomioistuin</span><span class="tag">Hallinto-oikeus</span></div>
-</article><article class="card">
-  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
+</article><article class="card service reveal">
+  <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div><span class="card-num">03</span></div>
   <h3>Perheoikeus</h3>
   <p class="tagline">Suhteet ylläpidetään</p>
   <p>Palvelemme perheoikeudellisissa kysymyksissä.</p>
   <ul><li>Edunvalvonta ja edunvalvontavaltakirjat</li><li>Perunkirjoitukset</li><li>Testamentit</li><li>Ositukset ja perinnönjaot</li></ul>
   <div class="tags"><span class="tag">Yleinen tuomioistuin</span><span class="tag">Hallinto-oikeus</span></div>
-</article><article class="card">
-  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M8 21h8"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></svg></div>
+</article><article class="card service reveal">
+  <div class="card-top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M8 21h8"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></svg></div><span class="card-num">04</span></div>
   <h3>Vero-oikeus ja sosiaaliturva-asiat</h3>
   <p class="tagline">Yleiset oikeudet turvataan</p>
   <p>Palvelemme vero-oikeudessa ja sosiaaliturvakysymyksissä.</p>
@@ -90,19 +112,19 @@
       <p>Kaikki tarpeellinen tieto edunvalvontavaltakirjan, perukirjan ja testamentin laadinnasta tiiviinä verkkokursseina. Säästä omatoimisesti paljon rahaa.</p>
     </div>
     <div class="grid grid-3">
-<article class="card course">
+<article class="card course reveal">
   <span class="badge">Lanseeraushinta</span>
   <h3>Edunvalvontavaltakirja: mielenrauhaa arkeen</h3>
   <p>Kaikki tarpeellinen tieto edunvalvontavaltakirjan laadinnasta.</p>
   <div class="price"><strong>59 €</strong><span>lokakuun loppuun 2026 saakka</span></div>
   <a class="btn btn-primary btn-sm" href="https://lakitstoviva.campwire.com/checkout/edunvalvontavaltakirja-mielenrauhaa-arkeen-1237f954" target="_blank" rel="noopener">Katso ja tilaa</a>
-</article><article class="card course">
+</article><article class="card course reveal">
   <span class="badge">Lanseeraushinta</span>
   <h3>Perukirjan laatiminen – askel askeleelta</h3>
   <p>Kaikki tarpeellinen tieto perunkirjoituksesta.</p>
   <div class="price"><strong>79 €</strong><span>lokakuun loppuun 2026 saakka</span></div>
   <a class="btn btn-primary btn-sm" href="https://lakitstoviva.campwire.com/checkout/perukirjan-laatiminen-askel-askeleelta-3d7a720c" target="_blank" rel="noopener">Katso ja tilaa</a>
-</article><article class="card course">
+</article><article class="card course reveal">
   <span class="badge">Lanseeraushinta</span>
   <h3>Testamenttikurssi: hoida tärkeä asia kuntoon</h3>
   <p>Mielenrauhaa ja selkeyttä helposti. Kaikki tarpeellinen tieto testamentin laadinnasta.</p>
@@ -114,9 +136,9 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section process">
   <div class="container split">
-    <div class="prose">
+    <div class="prose reveal">
       <div class="eyebrow">Näin asiointi etenee</div>
       <h2>Selkeä polku ensimmäisestä yhteydenotosta ratkaisuun</h2>
       <ol class="steps">
@@ -126,12 +148,12 @@
       </ol>
       <a class="btn btn-outline" href="tietoa-meista.html#hinnasto">Katso hinnasto</a>
     </div>
-    <aside class="aside">
+    <aside class="aside aside-dark reveal">
       <div class="eyebrow">Tietoa meistä</div>
       <h3>Online-virtuaalitoimisto Joensuusta</h3>
       <p class="muted">Lakiasiaintoimisto Virranvälke aloitti toimintansa maaliskuussa 2020 ja palvelee asiakkaitaan täysin verkossa ilman kiinteää toimitilaa. Toiminta-alue on ensisijaisesti Joensuun seutu, tarvittaessa myös pääkaupunkiseutu.</p>
       <p class="muted">Toimintaa johtaa lakimies, OTM <strong>Olli Virmajoki</strong>. Yritys myös kokeilee ja hyödyntää tekoälyä sekä asiakaspalvelussa että lakiasiainpalvelussa.</p>
-      <div class="hero-actions"><a class="btn btn-primary btn-sm" href="tietoa-meista.html">Lue lisää</a><a class="btn btn-outline btn-sm" href="tiimimme.html">Tiimimme</a></div>
+      <div class="hero-actions"><a class="btn btn-gold btn-sm" href="tietoa-meista.html">Lue lisää</a><a class="btn btn-outline-light btn-sm" href="tiimimme.html">Tiimimme</a></div>
     </aside>
   </div>
 </section>
@@ -151,8 +173,9 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <h4>Lakiasiaintoimisto Virranvälke</h4>
-        <p>Y-tunnus 3192420-6<br>Joensuu<br>Online-virtuaalitoimisto, tapaamiset sopimuksen mukaan.</p>
+        <a class="brand brand-footer" href="index.html"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#122441"/><path d="M9 12l7 16 4-9 4 9 7-16" fill="none" stroke="#e9d9b5" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
+        <p>Lakiasiantuntijat palveluksessasi. Online-virtuaalitoimisto Joensuusta, tapaamiset sopimuksen mukaan.</p>
+        <p class="footer-meta">Y-tunnus 3192420-6</p>
       </div>
       <div>
         <h4>Yhteystiedot</h4>
@@ -188,6 +211,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js"></script>
+<script src="assets/main.js?v=2"></script>
 </body>
 </html>

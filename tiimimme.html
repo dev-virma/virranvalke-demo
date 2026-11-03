@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23122441'/%3E%3Cpath d='M9 12l7 16 4-9 4 9 7-16' fill='none' stroke='%23e9d9b5' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -20,12 +20,12 @@
     <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <nav class="nav" id="nav"><a href="index.html">Koti</a><a href="tietoa-meista.html">Tietoa meistä</a><a href="tiimimme.html" aria-current="page">Tiimimme</a><a href="tietosuojaseloste.html">Tietosuojaseloste</a><a class="btn btn-gold btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></nav>
+    <nav class="nav" id="nav"><a href="index.html">Koti</a><a href="index.html#palvelut">Palvelut</a><a href="tietoa-meista.html">Tietoa meistä</a><a href="tiimimme.html" aria-current="page">Tiimimme</a><a href="yhteydenotto.html">Yhteydenotto</a><a class="btn btn-gold btn-sm" href="tel:+358505598200"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> 050 559 8200</a></nav>
   </div>
 </header>
 <section class="page-hero">
   <div class="container">
-    <div class="eyebrow">Tiimimme</div>
+    <nav class="crumbs" aria-label="Murupolku"><a href="index.html">Koti</a><span>/</span><span>Tiimimme</span></nav>
     <h1>Olemme sitoutuneet auttamaan sinua</h1>
     <p>Kokenut lakimies ja kasvava tiimi. Etsimme joukkoomme uusia osaajia.</p>
   </div>
@@ -33,17 +33,28 @@
 
 <section class="section">
   <div class="container">
-    <div class="grid team">
-      <article class="card person">
-        <div class="avatar" aria-hidden="true">OV</div>
+    <article class="card person featured reveal">
+      <div class="featured-side">
+        <div class="avatar avatar-lg" aria-hidden="true">OV</div>
         <h3>Olli Virmajoki</h3>
-        <p class="role">Toimitusjohtaja</p>
+        <p class="role">Toimitusjohtaja · Lakimies, OTM</p>
+        <div class="tags">
+          <span class="tag">Asianajaja-tutkinto 2019</span><span class="tag">DI</span><span class="tag">FL</span><span class="tag">FT</span><span class="tag">HTK</span><span class="tag">Opettajan ammatillinen tutkinto</span>
+        </div>
+      </div>
+      <div class="featured-body">
         <p>Olli on yrityksen perustajajäsen. Lakimies, OTM ja asianajaja-tutkinto vuonna 2019.</p>
         <p>Hänellä on laaja ja monipuolinen koulutus: DI, opettajan ammatillinen tutkinto, FL, FT ja HTK.</p>
         <p>Ollilla on monipuolinen työkokemus kattaen yritysmaailman, kunnallishallinnon sekä myös koulutussektorin, joissa hän on perehtynyt laajasti myös työelämän ongelmiin.</p>
-        <div class="tags"><a class="btn btn-outline btn-sm" href="http://cvapp.fi/r/H6uUn2Vmu" target="_blank" rel="noopener">Katso CV</a></div>
-      </article>
-      <article class="card person">
+        <div class="hero-actions"><a class="btn btn-primary btn-sm" href="http://cvapp.fi/r/H6uUn2Vmu" target="_blank" rel="noopener">Katso CV</a><a class="btn btn-outline btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></div>
+      </div>
+    </article>
+    <div class="section-head" style="margin-top:56px">
+      <div class="eyebrow">Avoimet paikat</div>
+      <h2>Etsimme tiimiimme uusia osaajia</h2>
+    </div>
+    <div class="grid grid-2">
+      <article class="card person reveal">
         <div class="avatar open" aria-hidden="true">?</div>
         <span class="open-badge">Avoin paikka</span>
         <h3>Hanna Eskola</h3>
@@ -51,7 +62,7 @@
         <p>Etsimme tiimiimme uutta ”Hannaa”.</p>
         <div class="tags"><a class="btn btn-outline btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></div>
       </article>
-      <article class="card person">
+      <article class="card person reveal">
         <div class="avatar open" aria-hidden="true">?</div>
         <span class="open-badge">Avoin paikka</span>
         <h3>Petri Korhonen</h3>
@@ -78,8 +89,9 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <h4>Lakiasiaintoimisto Virranvälke</h4>
-        <p>Y-tunnus 3192420-6<br>Joensuu<br>Online-virtuaalitoimisto, tapaamiset sopimuksen mukaan.</p>
+        <a class="brand brand-footer" href="index.html"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#122441"/><path d="M9 12l7 16 4-9 4 9 7-16" fill="none" stroke="#e9d9b5" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
+        <p>Lakiasiantuntijat palveluksessasi. Online-virtuaalitoimisto Joensuusta, tapaamiset sopimuksen mukaan.</p>
+        <p class="footer-meta">Y-tunnus 3192420-6</p>
       </div>
       <div>
         <h4>Yhteystiedot</h4>
@@ -115,6 +127,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js"></script>
+<script src="assets/main.js?v=2"></script>
 </body>
 </html>
