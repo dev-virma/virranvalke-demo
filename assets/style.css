@@ -45,6 +45,13 @@ p { margin: 0 0 1em; }
 .section-head { max-width: 62ch; margin-bottom: 2.5rem; }
 .section-head p { color: var(--ink-soft); }
 
+/* Saavutettavuus */
+.skip-link { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--navy); color: var(--white); padding: 10px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: top .15s; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.btn:focus-visible { outline-offset: 2px; }
+svg { flex: none; }
+
 /* Demo banner */
 .demo-banner {
   background: var(--gold);
@@ -386,6 +393,8 @@ p { margin: 0 0 1em; }
 }
 @media (max-width: 900px) {
   .grid-2, .grid-3, .team, .pricing { grid-template-columns: 1fr 1fr; }
+  /* Kolmen kortin ryhmässä viimeinen kortti levenee koko riville, ettei se jää orvoksi */
+  .grid-3 > :last-child:nth-child(odd), .pricing > :last-child:nth-child(odd) { grid-column: 1 / -1; }
   .split, .contact-grid, .footer-grid, .featured { grid-template-columns: 1fr; }
   .featured { padding: 28px; }
 }

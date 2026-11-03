@@ -15,10 +15,12 @@ ICON = {
   "mail": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
   "video": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg>',
 }
+# Kiinteä koko ikoneille, jotta ne eivät piirry jättikokoisina, jos CSS ei ole vielä latautunut.
+ICON = {k: v.replace('<svg ', '<svg width="24" height="24" ', 1) for k, v in ICON.items()}
 
 def brand_mark(uid):
     """Virta-V-logomerkki. uid erottaa gradientin id:n, jos merkki on sivulla useasti."""
-    return f'''<svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="vv-{uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9d9b5"/><stop offset="1" stop-color="#b8892f"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#122441"/><path d="M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20" fill="none" stroke="url(#vv-{uid})" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z" fill="#e9d9b5"/></svg>'''
+    return f'''<svg class="brand-mark" width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="vv-{uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9d9b5"/><stop offset="1" stop-color="#b8892f"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#122441"/><path d="M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20" fill="none" stroke="url(#vv-{uid})" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z" fill="#e9d9b5"/></svg>'''
 
 BRAND_MARK = brand_mark("h")
 FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23122441'/%3E%3Cpath d='M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20' fill='none' stroke='%23d6b86a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z' fill='%23e9d9b5'/%3E%3C/svg%3E"
@@ -76,13 +78,19 @@ def head(title, desc):
 <title>{title} – Lakiasiaintoimisto Virranvälke (demo)</title>
 <meta name="description" content="{desc}">
 <meta name="robots" content="noindex">
+<meta property="og:title" content="{title} – Lakiasiaintoimisto Virranvälke">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fi_FI">
+<meta name="theme-color" content="#122441">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=5">
+<link rel="stylesheet" href="assets/style.css?v=6">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
+<a class="skip-link" href="#main">Siirry sisältöön</a>
 <div class="demo-banner"><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</div>
 '''
 
@@ -100,9 +108,11 @@ def header(current):
     <nav class="nav" id="nav">{links}<a class="btn btn-gold btn-sm" href="tel:+358505598200">{ICON["phone"]} 050 559 8200</a></nav>
   </div>
 </header>
+<main id="main">
 '''
 
-FOOTER = '''<footer class="site-footer">
+FOOTER = '''</main>
+<footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
@@ -144,7 +154,7 @@ FOOTER = '''<footer class="site-footer">
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=3"></script>
+<script src="assets/main.js?v=4"></script>
 </body>
 </html>
 '''
@@ -208,9 +218,9 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
         <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
       </div>
       <div class="hero-facts">
-        <div class="fact"><strong data-count="2020" data-from="1980">2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
-        <div class="fact"><strong data-count="4">4</strong><span>Osaamisaluetta yrityksille ja yksityisille</span></div>
-        <div class="fact"><strong data-count="15" data-suffix=" min">15 min</strong><span>Ensimmäinen selvittämistapaaminen on ilmainen</span></div>
+        <div class="fact"><strong data-count="2020" data-from="1980">2020</strong><span>Toiminta alkoi</span></div>
+        <div class="fact"><strong data-count="4">4</strong><span>Osaamisaluetta</span></div>
+        <div class="fact"><strong data-count="15" data-suffix=" min">15 min</strong><span>Ilmainen aloitustapaaminen</span></div>
       </div>
     </div>
     <aside class="hero-card">
