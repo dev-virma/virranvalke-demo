@@ -14,12 +14,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=7">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23122441'/%3E%3Cpath d='M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20' fill='none' stroke='%23d6b86a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z' fill='%23e9d9b5'/%3E%3C/svg%3E">
 </head>
 <body>
 <a class="skip-link" href="#main">Siirry sisältöön</a>
-<div class="demo-banner"><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</div>
+<div class="demo-banner" id="demo-banner"><span><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</span><button class="demo-close" type="button" aria-label="Sulje demo-ilmoitus" data-demo-close>&times;</button></div>
 <header class="site-header">
   <div class="container">
     <a class="brand" href="index.html"><svg class="brand-mark" width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="vv-h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9d9b5"/><stop offset="1" stop-color="#b8892f"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#122441"/><path d="M14 20 C 21 18, 26 32, 32 46 C 38 32, 43 18, 50 20" fill="none" stroke="url(#vv-h)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M49 8 l1.7 4.3 4.3 1.7 -4.3 1.7 -1.7 4.3 -1.7 -4.3 -4.3 -1.7 4.3 -1.7z" fill="#e9d9b5"/></svg><span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
@@ -175,6 +175,10 @@
       <a class="btn btn-outline" href="tietoa-meista.html#hinnasto">Katso hinnasto</a>
     </div>
     <aside class="aside aside-dark reveal">
+      <div class="aside-person">
+        <img class="photo" src="assets/img/olli-virmajoki.jpg" alt="Olli Virmajoki" width="960" height="960" loading="lazy">
+        <div><strong>Olli Virmajoki</strong><span>Toimitusjohtaja · Lakimies, OTM</span></div>
+      </div>
       <div class="eyebrow">Tietoa meistä</div>
       <h3>Online-virtuaalitoimisto Joensuusta</h3>
       <p class="muted">Lakiasiaintoimisto Virranvälke aloitti toimintansa maaliskuussa 2020 ja palvelee asiakkaitaan täysin verkossa ilman kiinteää toimitilaa. Toiminta-alue on ensisijaisesti Joensuun seutu, tarvittaessa myös pääkaupunkiseutu.</p>
@@ -238,6 +242,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=4"></script>
+<script src="assets/main.js?v=5"></script>
 </body>
 </html>

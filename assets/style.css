@@ -62,6 +62,15 @@ svg { flex: none; }
   padding: 8px 16px;
 }
 .demo-banner strong { font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; }
+.demo-banner { display: flex; align-items: center; justify-content: center; gap: 12px; padding-right: 44px; position: relative; }
+.demo-banner.hidden { display: none; }
+.demo-close {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%; border: 0; cursor: pointer;
+  background: rgba(11, 24, 48, .12); color: var(--navy-deep); font-size: 1.2rem; line-height: 1;
+  display: grid; place-items: center; transition: background .15s;
+}
+.demo-close:hover { background: rgba(11, 24, 48, .25); }
 
 /* Header */
 .site-header {
@@ -310,6 +319,14 @@ svg { flex: none; }
 .featured-body p { color: var(--ink-soft); margin-bottom: 1em; }
 .featured-body .hero-actions { margin-top: 8px; }
 .avatar-lg { width: 112px; height: 112px; font-size: 2.3rem; box-shadow: 0 0 0 6px var(--gold-soft); }
+.photo { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: center top; flex: none; }
+.photo-lg { width: 140px; height: 140px; box-shadow: 0 0 0 6px var(--gold-soft), 0 16px 32px rgba(18, 36, 65, .18); }
+.photo-xs { width: 24px; height: 24px; vertical-align: middle; margin-right: 6px; display: inline-block; }
+.dd-person { display: inline-flex; align-items: center; }
+.aside-person { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.14); }
+.aside-person .photo { box-shadow: 0 0 0 3px var(--gold); }
+.aside-person strong { display: block; color: var(--white); font-size: 1.05rem; }
+.aside-person span { font-size: .85rem; color: var(--gold-soft); }
 
 /* Contact */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 40px; align-items: start; }

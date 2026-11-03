@@ -86,12 +86,12 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=7">
 <link rel="icon" href="{FAVICON}">
 </head>
 <body>
 <a class="skip-link" href="#main">Siirry sisältöön</a>
-<div class="demo-banner"><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</div>
+<div class="demo-banner" id="demo-banner"><span><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</span><button class="demo-close" type="button" aria-label="Sulje demo-ilmoitus" data-demo-close>&times;</button></div>
 '''
 
 def header(current):
@@ -154,7 +154,7 @@ FOOTER = '''</main>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="assets/main.js?v=4"></script>
+<script src="assets/main.js?v=5"></script>
 </body>
 </html>
 '''
@@ -290,6 +290,10 @@ index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, 
       <a class="btn btn-outline" href="tietoa-meista.html#hinnasto">Katso hinnasto</a>
     </div>
     <aside class="aside aside-dark reveal">
+      <div class="aside-person">
+        <img class="photo" src="assets/img/olli-virmajoki.jpg" alt="Olli Virmajoki" width="960" height="960" loading="lazy">
+        <div><strong>Olli Virmajoki</strong><span>Toimitusjohtaja · Lakimies, OTM</span></div>
+      </div>
       <div class="eyebrow">Tietoa meistä</div>
       <h3>Online-virtuaalitoimisto Joensuusta</h3>
       <p class="muted">Lakiasiaintoimisto Virranvälke aloitti toimintansa maaliskuussa 2020 ja palvelee asiakkaitaan täysin verkossa ilman kiinteää toimitilaa. Toiminta-alue on ensisijaisesti Joensuun seutu, tarvittaessa myös pääkaupunkiseutu.</p>
@@ -323,7 +327,7 @@ about = head("Tietoa meistä", "Lakiasiaintoimisto Virranvälke on vuonna 2020 p
       <h3>Lyhyesti</h3>
       <dl>
         <dt>Perustettu</dt><dd>Maaliskuu 2020</dd>
-        <dt>Toimitusjohtaja</dt><dd><a href="tiimimme.html">Olli Virmajoki</a></dd>
+        <dt>Toimitusjohtaja</dt><dd><a class="dd-person" href="tiimimme.html"><img class="photo photo-xs" src="assets/img/olli-virmajoki.jpg" alt="" width="960" height="960" loading="lazy">Olli Virmajoki</a></dd>
         <dt>Toimintatapa</dt><dd>Online-virtuaalitoimisto, ei kiinteää toimitilaa</dd>
         <dt>Palaverit</dt><dd>Skype ja Teams, tapaamiset sopimuksen mukaan</dd>
         <dt>Toiminta-alue</dt><dd>Joensuun seutu, tarvittaessa pääkaupunkiseutu</dd>
@@ -363,7 +367,7 @@ team = head("Tiimimme", "Olemme sitoutuneet auttamaan sinua. Tutustu Lakiasiaint
   <div class="container">
     <article class="card person featured reveal">
       <div class="featured-side">
-        <div class="avatar avatar-lg" aria-hidden="true">OV</div>
+        <img class="photo photo-lg" src="assets/img/olli-virmajoki.jpg" alt="Olli Virmajoki" width="960" height="960" loading="lazy">
         <h3>Olli Virmajoki</h3>
         <p class="role">Toimitusjohtaja · Lakimies, OTM</p>
         <div class="tags">

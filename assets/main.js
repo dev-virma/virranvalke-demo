@@ -10,6 +10,21 @@
     toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 3500);
   }
 
+  // Demo-banneri: suljettava, valinta muistetaan selaimessa
+  var banner = document.getElementById('demo-banner');
+  if (banner) {
+    var bannerClosed = null;
+    try { bannerClosed = localStorage.getItem('vv-demo-banner'); } catch (e) {}
+    if (bannerClosed) banner.classList.add('hidden');
+    var closeBtn = banner.querySelector('[data-demo-close]');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        banner.classList.add('hidden');
+        try { localStorage.setItem('vv-demo-banner', 'closed'); } catch (e) {}
+      });
+    }
+  }
+
   // Mobiilivalikko
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
