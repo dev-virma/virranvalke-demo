@@ -1,0 +1,509 @@
+# -*- coding: utf-8 -*-
+"""Generoi demo-sivuston HTML-sivut yhteisellä headerilla ja footerilla."""
+import sys, os
+
+OUT = sys.argv[1]
+
+ICON = {
+  "handshake": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l4-4h4l3 3"/><path d="M21 11l-4-4h-3"/><path d="M7 14l3 3a2 2 0 0 0 3 0l1-1"/><path d="M10 11l3 3a2 2 0 0 0 3 0"/><path d="M3 11v5h3"/><path d="M21 11v5h-3"/></svg>',
+  "briefcase": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>',
+  "home": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>',
+  "scale": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M8 21h8"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></svg>',
+  "pin": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  "clock": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+  "mail": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  "video": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg>',
+}
+
+BRAND_MARK = '''<svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#122441"/><path d="M9 12l7 16 4-9 4 9 7-16" fill="none" stroke="#e9d9b5" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>'''
+
+NAV = [
+  ("index.html", "Koti"),
+  ("tietoa-meista.html", "Tietoa meistä"),
+  ("tiimimme.html", "Tiimimme"),
+  ("tietosuojaseloste.html", "Tietosuojaseloste"),
+]
+
+def head(title, desc):
+    return f'''<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title} – Lakiasiaintoimisto Virranvälke (demo)</title>
+<meta name="description" content="{desc}">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23122441'/%3E%3Cpath d='M9 12l7 16 4-9 4 9 7-16' fill='none' stroke='%23e9d9b5' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="demo-banner"><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</div>
+'''
+
+def header(current):
+    links = "".join(
+        f'<a href="{href}"{" aria-current=\"page\"" if href == current else ""}>{label}</a>'
+        for href, label in NAV
+    )
+    return f'''<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">{BRAND_MARK}<span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
+    <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="nav">{links}<a class="btn btn-gold btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></nav>
+  </div>
+</header>
+'''
+
+FOOTER = '''<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Lakiasiaintoimisto Virranvälke</h4>
+        <p>Y-tunnus 3192420-6<br>Joensuu<br>Online-virtuaalitoimisto, tapaamiset sopimuksen mukaan.</p>
+      </div>
+      <div>
+        <h4>Yhteystiedot</h4>
+        <ul>
+          <li><a href="tel:+358505598200">+358 50 559 8200</a></li>
+          <li><a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a></li>
+          <li><a href="yhteydenotto.html">Yhteydenottolomake</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sivusto</h4>
+        <ul>
+          <li><a href="tietoa-meista.html">Tietoa meistä</a></li>
+          <li><a href="tiimimme.html">Tiimimme</a></li>
+          <li><a href="tietosuojaseloste.html">Tietosuojaseloste</a></li>
+          <li><a href="kayttoehdot.html">Käyttöehdot</a></li>
+          <li><a href="tietosuojakaytanto.html">Tietosuojakäytäntö</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lakiasiaintoimisto Virranvälke</span>
+      <span>Demo-sivusto · <a href="#" data-cookie-open>Evästeet</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="dialog" aria-label="Evästeet">
+  <p>Käytämme evästeitä mahdollistaaksemme verkkosivustomme asianmukaisen toiminnan ja turvallisuuden sekä tarjotaksemme sinulle parhaan mahdollisen käyttökokemuksen.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary btn-sm" data-cookie="necessary">Hyväksy vain tarpeelliset</button>
+    <button class="btn btn-outline btn-sm" data-cookie="all">Hyväksy kaikki</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/main.js"></script>
+</body>
+</html>
+'''
+
+def page_hero(eyebrow, title, text):
+    return f'''<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">{eyebrow}</div>
+    <h1>{title}</h1>
+    <p>{text}</p>
+  </div>
+</section>
+'''
+
+CTA = '''<section class="cta">
+  <div class="container">
+    <div>
+      <h2>Ensimmäinen konsultaatio on ilmainen</h2>
+      <p>Noin 15 minuutin toimeksiannon selvittämistapaaminen ei maksa mitään. Soita tai jätä yhteydenottopyyntö.</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-light" href="tel:+358505598200">Soita +358 50 559 8200</a>
+      <a class="btn btn-outline-light" href="yhteydenotto.html">Jätä yhteydenottopyyntö</a>
+    </div>
+  </div>
+</section>
+'''
+
+def service(icon, title, tagline, intro, items, forums):
+    lis = "".join(f"<li>{i}</li>" for i in items)
+    tags = "".join(f'<span class="tag">{f}</span>' for f in forums)
+    return f'''<article class="card">
+  <div class="icon">{ICON[icon]}</div>
+  <h3>{title}</h3>
+  <p class="tagline">{tagline}</p>
+  <p>{intro}</p>
+  <ul>{lis}</ul>
+  <div class="tags">{tags}</div>
+</article>'''
+
+def course(title, desc, price, url):
+    return f'''<article class="card course">
+  <span class="badge">Lanseeraushinta</span>
+  <h3>{title}</h3>
+  <p>{desc}</p>
+  <div class="price"><strong>{price} €</strong><span>lokakuun loppuun 2026 saakka</span></div>
+  <a class="btn btn-primary btn-sm" href="{url}" target="_blank" rel="noopener">Katso ja tilaa</a>
+</article>'''
+
+# ---------- ETUSIVU ----------
+index = head("Lakiasiaintoimisto", "Lakiasiantuntijat palveluksessasi: yritys-, työ-, perhe- ja vero-oikeus sekä sosiaaliturva-asiat. Joensuu ja pääkaupunkiseutu.") + header("index.html") + '''
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Lakiasiaintoimisto Virranvälke · Joensuu</div>
+    <h1>Lakiasiantuntijat palveluksessasi</h1>
+    <p class="lead">Palvelemme yrityksiä ja yksityishenkilöitä työ-, yritys-, perhe- ja vero-oikeudellisissa kysymyksissä. Nykyaikainen online-virtuaalitoimisto, jossa asiat hoidetaan tehokkaasti ja luottamuksellisesti.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="yhteydenotto.html">Ota yhteyttä</a>
+      <a class="btn btn-outline-light" href="#palvelut">Tutustu palveluihin</a>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><strong>15 min</strong><span>Ensimmäinen selvittämistapaaminen on ilmainen</span></div>
+      <div class="fact"><strong>2020</strong><span>Toiminta alkoi maaliskuussa 2020</span></div>
+      <div class="fact"><strong>Online</strong><span>Palaverit Skype- ja Teams-yhteyksin, tapaamiset sopimuksen mukaan</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="palvelut">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Palvelumme</div>
+      <h2>Neljä osaamisaluetta, yksi yhteyshenkilö</h2>
+      <p>Tapaukset selvitetään tehokkaasti ja oikeutesi suojataan. Alla pääasialliset toimialueemme ja tuomioistuimet, joissa asioita hoidamme.</p>
+    </div>
+    <div class="grid grid-2">
+''' + service("handshake", "Yrityserimielisyydet", "Tapaukset selvitetään tehokkaasti",
+              "Palvelemme yksityistämis- ja yhtiöittämiskysymyksissä.",
+              ["Kunnan yhtiöittämiset", "Osakassopimukset", "Liikkeen luovutukset", "Julkiset hankinnat"],
+              ["Yleinen tuomioistuin", "Markkinaoikeus"]) + service("briefcase", "Työllisyyserimielisyydet", "Työsuhdeoikeutesi suojataan",
+              "Palvelemme työ- ja virkamiesoikeudellisissa kysymyksissä.",
+              ["Yhteistoimintamenettelyt", "Lomautukset", "Palvelussuhteen päättämiset", "Työsopimukset", "Liikkeen luovutukset"],
+              ["Yleinen tuomioistuin", "Hallinto-oikeus"]) + service("home", "Perheoikeus", "Suhteet ylläpidetään",
+              "Palvelemme perheoikeudellisissa kysymyksissä.",
+              ["Edunvalvonta ja edunvalvontavaltakirjat", "Perunkirjoitukset", "Testamentit", "Ositukset ja perinnönjaot"],
+              ["Yleinen tuomioistuin", "Hallinto-oikeus"]) + service("scale", "Vero-oikeus ja sosiaaliturva-asiat", "Yleiset oikeudet turvataan",
+              "Palvelemme vero-oikeudessa ja sosiaaliturvakysymyksissä.",
+              ["Henkilö- ja yritysverotus", "Työttömyysturva-asiat", "Toimeentuloturva-asiat"],
+              ["Hallinto-oikeus", "SAMU-lautakunta", "Vakuutusoikeus"]) + '''
+    </div>
+  </div>
+</section>
+
+<section class="section courses" id="kurssit">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Minidigikurssit</div>
+      <h2>Hoida tärkeä asia kuntoon omatoimisesti</h2>
+      <p>Kaikki tarpeellinen tieto edunvalvontavaltakirjan, perukirjan ja testamentin laadinnasta tiiviinä verkkokursseina. Säästä omatoimisesti paljon rahaa.</p>
+    </div>
+    <div class="grid grid-3">
+''' + course("Edunvalvontavaltakirja: mielenrauhaa arkeen", "Kaikki tarpeellinen tieto edunvalvontavaltakirjan laadinnasta.", "59", "https://lakitstoviva.campwire.com/checkout/edunvalvontavaltakirja-mielenrauhaa-arkeen-1237f954") + course("Perukirjan laatiminen – askel askeleelta", "Kaikki tarpeellinen tieto perunkirjoituksesta.", "79", "https://lakitstoviva.campwire.com/checkout/perukirjan-laatiminen-askel-askeleelta-3d7a720c") + course("Testamenttikurssi: hoida tärkeä asia kuntoon", "Mielenrauhaa ja selkeyttä helposti. Kaikki tarpeellinen tieto testamentin laadinnasta.", "59", "https://lakitstoviva.campwire.com/checkout/testamenttikurssi-hoida-tarkea-asia-kuntoon-mielenrauhaa-ja-selkeytta-8a8e5426") + '''
+    </div>
+    <p class="note">Minidigikursseissa on käytetty myös tekoälysisältöjä.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div class="prose">
+      <div class="eyebrow">Näin asiointi etenee</div>
+      <h2>Selkeä polku ensimmäisestä yhteydenotosta ratkaisuun</h2>
+      <ol class="steps">
+        <li><span class="step-num">1</span><div><strong>Ilmainen selvittämistapaaminen</strong><p>Noin 15 minuutin keskustelu, jossa käymme asiasi läpi ja arvioimme, miten sitä kannattaa viedä eteenpäin.</p></div></li>
+        <li><span class="step-num">2</span><div><strong>Sovitaan hinnoittelusta</strong><p>Tuntihinta tai palvelukohtainen kiinteä hinta, jota ei ylitetä ilman erillistä sopimista kanssasi.</p></div></li>
+        <li><span class="step-num">3</span><div><strong>Asia hoidetaan</strong><p>Palaverit verkossa Skype- tai Teams-yhteyksin. Henkilökohtaiset tapaamiset sovitaan erikseen luottamuksellisessa paikassa.</p></div></li>
+      </ol>
+      <a class="btn btn-outline" href="tietoa-meista.html#hinnasto">Katso hinnasto</a>
+    </div>
+    <aside class="aside">
+      <div class="eyebrow">Tietoa meistä</div>
+      <h3>Online-virtuaalitoimisto Joensuusta</h3>
+      <p class="muted">Lakiasiaintoimisto Virranvälke aloitti toimintansa maaliskuussa 2020 ja palvelee asiakkaitaan täysin verkossa ilman kiinteää toimitilaa. Toiminta-alue on ensisijaisesti Joensuun seutu, tarvittaessa myös pääkaupunkiseutu.</p>
+      <p class="muted">Toimintaa johtaa lakimies, OTM <strong>Olli Virmajoki</strong>. Yritys myös kokeilee ja hyödyntää tekoälyä sekä asiakaspalvelussa että lakiasiainpalvelussa.</p>
+      <div class="hero-actions"><a class="btn btn-primary btn-sm" href="tietoa-meista.html">Lue lisää</a><a class="btn btn-outline btn-sm" href="tiimimme.html">Tiimimme</a></div>
+    </aside>
+  </div>
+</section>
+''' + CTA + FOOTER
+
+# ---------- TIETOA MEISTÄ ----------
+def price_card(title, hourly, vat_line, extra=""):
+    return f'''<div class="price-card">
+  <h3>{title}</h3>
+  <div class="big">{hourly} €<small> / tunti (alv 0 %)</small></div>
+  <div class="vat">{vat_line}</div>
+  {f"<p>{extra}</p>" if extra else ""}
+</div>'''
+
+about = head("Tietoa meistä", "Lakiasiaintoimisto Virranvälke on vuonna 2020 perustettu online-virtuaalitoimisto. Parasta lainopillista apua Joensuun seudulla ja pääkaupunkiseudulla.") + header("tietoa-meista.html") + page_hero("Tietoa meistä", "Parasta lainopillista apua vuodesta 2020", "Nykyaikainen, täysin online-pohjainen lakiasiaintoimisto, jonka toiminta kohdistuu erityisesti työ- ja virkamiesoikeudellisiin kysymyksiin.") + '''
+<section class="section">
+  <div class="container split">
+    <div class="prose">
+      <h2>Toimisto ilman seiniä</h2>
+      <p><strong>Lakiasiaintoimisto Virranvälke</strong> aloitti toimintansa maaliskuun alussa 2020 ja sen tarkoitus on vähitellen laajentaa toimintaansa valitsemillaan päätoiminta-aloillaan. Heti pian, jo toimintansa alussa, yritys siirtyi, osin koronaepidemian takia, palvelemaan asiakkaitaan nykyaikaisena täysin puhtaana online-virtuaalitoimistona ilman kiinteää toimitilaa. Palaverit ja neuvottelut tapahtuvat jatkossakin verkossa Skype- ja Teams-yhteyksin. Kaikki henkilökohtaiset tapaamiset sovitaan erikseen luottamuksellisessa paikassa tapahtuviksi.</p>
+      <p>Yrityksen toiminnassa on erityisesti myös tarkoitus kokeilla, kehittää ja hyödyntää tekoälyä sekä asiakaspalvelussa että varsinaisessa lakiasiainpalvelussa. Yrityksen ohjelmistojen käyttöehdoista pyydämme tutustumaan <a href="tietosuojaseloste.html#tietosuojarikoslauseke">tietosuojaselosteen asiakohtaan 9, Tietosuojarikoslauseke</a>.</p>
+      <p>Lakiasiaintoimisto Virranvälkkeen pääasiallinen toiminta kohdistuu työ- ja virkamiesoikeudellisiin kysymyksiin. Mutta myös yritystoimintaan, perheoikeuteen, vero-oikeuteen ja työttömyys- ja sosiaaliturvan piiriin kuuluvat asiat sisältyvät toiminta-ajatukseen.</p>
+      <p>Toiminta-alue on ensisijaisesti Joensuun seutu, mutta myös pääkaupunkiseudun alueella olevia asiakkaita palvellaan tarvittaessa mahdollisuuksien mukaan.</p>
+    </div>
+    <aside class="aside">
+      <h3>Lyhyesti</h3>
+      <dl>
+        <dt>Perustettu</dt><dd>Maaliskuu 2020</dd>
+        <dt>Toimitusjohtaja</dt><dd><a href="tiimimme.html">Olli Virmajoki</a></dd>
+        <dt>Toimintatapa</dt><dd>Online-virtuaalitoimisto, ei kiinteää toimitilaa</dd>
+        <dt>Palaverit</dt><dd>Skype ja Teams, tapaamiset sopimuksen mukaan</dd>
+        <dt>Toiminta-alue</dt><dd>Joensuun seutu, tarvittaessa pääkaupunkiseutu</dd>
+        <dt>Y-tunnus</dt><dd>3192420-6</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" id="hinnasto">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Laskutushintamme</div>
+      <h2>Selkeä hinnoittelu</h2>
+      <p>Ensimmäinen noin 15 minuuttia kestävä toimeksiannon selvittämistapaaminen on ilmainen.</p>
+    </div>
+    <div class="pricing">
+''' + price_card("Yksityisasiakkaat", "200", "200,00 € / tunti + alv 24 % = 248,00 € / tunti") + price_card("Yritysasiakkaat", "230", "230,00 € / tunti + alv 24 % = 285,20 € / tunti") + price_card("Konsultointi", "150", "150,00 € / tunti + alv 24 % = 186,00 € / tunti", "Myös sovittelu.") + '''
+    </div>
+    <div class="pricing-extra">
+      <div class="callout">
+        <strong>Vaikeat toimeksiannot ja hankalissa olosuhteissa tehty työ: + 10 %</strong>
+        <p>Laskutushintoja voidaan korottaa 10 % perushinnoista.</p>
+      </div>
+      <div class="callout">
+        <strong>Palvelukohtainen hinnoittelu</strong>
+        <p>Voidaan sopia myös palvelukohtainen kiinteä hinnoittelu, jota ei ylitetä ilman asiakkaan kanssa sopimista. Esimerkkihintoja alkaen: testamentti 250 €, edunvalvontavaltakirja 250 €, perunkirjoitus 500 € ja ositus 700 €.</p>
+      </div>
+    </div>
+  </div>
+</section>
+''' + CTA + FOOTER
+
+# ---------- TIIMIMME ----------
+team = head("Tiimimme", "Olemme sitoutuneet auttamaan sinua. Tutustu Lakiasiaintoimisto Virranvälkkeen tiimiin.") + header("tiimimme.html") + page_hero("Tiimimme", "Olemme sitoutuneet auttamaan sinua", "Kokenut lakimies ja kasvava tiimi. Etsimme joukkoomme uusia osaajia.") + '''
+<section class="section">
+  <div class="container">
+    <div class="grid team">
+      <article class="card person">
+        <div class="avatar" aria-hidden="true">OV</div>
+        <h3>Olli Virmajoki</h3>
+        <p class="role">Toimitusjohtaja</p>
+        <p>Olli on yrityksen perustajajäsen. Lakimies, OTM ja asianajaja-tutkinto vuonna 2019.</p>
+        <p>Hänellä on laaja ja monipuolinen koulutus: DI, opettajan ammatillinen tutkinto, FL, FT ja HTK.</p>
+        <p>Ollilla on monipuolinen työkokemus kattaen yritysmaailman, kunnallishallinnon sekä myös koulutussektorin, joissa hän on perehtynyt laajasti myös työelämän ongelmiin.</p>
+        <div class="tags"><a class="btn btn-outline btn-sm" href="http://cvapp.fi/r/H6uUn2Vmu" target="_blank" rel="noopener">Katso CV</a></div>
+      </article>
+      <article class="card person">
+        <div class="avatar open" aria-hidden="true">?</div>
+        <span class="open-badge">Avoin paikka</span>
+        <h3>Hanna Eskola</h3>
+        <p class="role">Lakimies</p>
+        <p>Etsimme tiimiimme uutta ”Hannaa”.</p>
+        <div class="tags"><a class="btn btn-outline btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></div>
+      </article>
+      <article class="card person">
+        <div class="avatar open" aria-hidden="true">?</div>
+        <span class="open-badge">Avoin paikka</span>
+        <h3>Petri Korhonen</h3>
+        <p class="role">Lakimies</p>
+        <p>Etsimme tiimiimme uutta ”Petriä”.</p>
+        <div class="tags"><a class="btn btn-outline btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+''' + CTA + FOOTER
+
+# ---------- YHTEYDENOTTO ----------
+def info(icon, title, body):
+    return f'''<div class="info"><div class="icon">{ICON[icon]}</div><div><strong>{title}</strong><p>{body}</p></div></div>'''
+
+contact = head("Ota yhteyttä", "Ensimmäinen konsultaatio on ilmainen. Ota yhteyttä Lakiasiaintoimisto Virranvälkkeeseen puhelimitse, sähköpostilla tai lomakkeella.") + header("yhteydenotto.html") + page_hero("Yhteydenotto", "Ota yhteyttä", "Ensimmäinen konsultaatio on ilmainen. Jätä yhteystietosi, niin otamme sinuun yhteyttä niin pian kuin voimme.") + '''
+<section class="section">
+  <div class="container contact-grid">
+    <div class="info-list">
+''' + info("pin", "Postiosoite", "Lakiasiaintoimisto Virranvälke<br>Torikatu 3 B 12, 80110 Joensuu") + info("video", "Tapaamiset", "Palvelemme sinua nykyaikaisena täysin puhtaana online-virtuaalitoimistona ilman kiinteää toimitilaa. Palaverit ja neuvottelut tapahtuvat verkossa Skype- ja Teams-yhteyksin. Kaikki tapaamiset sovitaan erikseen luottamuksellisessa paikassa tapahtuviksi.") + info("clock", "Aukioloajat", "Maanantai – perjantai 9.00 – 18.00") + info("phone", "Puhelin", '<a href="tel:+358505598200">+358 50 559 8200</a><br><span class="muted">+358 xxxxx xxxx (maksullinen puhelinneuvonta 4,00 € / minuutti)</span>') + info("mail", "Sähköposti", '<a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a>') + '''
+    </div>
+    <form class="form" id="contact-form" novalidate>
+      <h3>Jätä yhteydenottopyyntö</h3>
+      <p class="hint">Ole hyvä ja jätä yhteystietosi niin otamme sinuun yhteyttä niin pian kuin voimme. (*) pakollinen kenttä.</p>
+      <div class="field">
+        <label for="f-name">Nimi (*)</label>
+        <input id="f-name" name="name" type="text" required autocomplete="name">
+      </div>
+      <div class="fields-2">
+        <div class="field">
+          <label for="f-email">Sähköposti (*)</label>
+          <input id="f-email" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="f-phone">Puhelin (*)</label>
+          <input id="f-phone" name="phone" type="tel" required autocomplete="tel">
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-interest">Olen kiinnostunut (*)</label>
+        <select id="f-interest" name="interest" required>
+          <option value="">Valitse…</option>
+          <option>Konsultaatio</option>
+          <option>Oikeudellinen palvelu</option>
+          <option>Sovittelu</option>
+          <option>Muu vaihtoehto</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-msg">Kerro asiasi lyhyesti</label>
+        <textarea id="f-msg" name="message"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Lähetä</button>
+      <p class="form-demo">Demo: lomake ei vielä lähetä viestiä mihinkään.</p>
+    </form>
+  </div>
+</section>
+''' + FOOTER
+
+# ---------- TIETOSUOJASELOSTE ----------
+privacy = head("Tietosuojaseloste", "Lakiasiaintoimisto Virranvälkkeen tietosuojaseloste.") + header("tietosuojaseloste.html") + page_hero("Tietosuoja", "Tietosuojaseloste", "Tämä tietosuojaseloste kertoo, kuinka Lakiasiaintoimisto Virranvälke kerää, käsittelee ja luovuttaa henkilötietoja lakiasiaintoimeksiannon hoitamisen ja siihen liittyvien lakisääteisten velvoitteiden täyttämisen ja markkinoinnin yhteydessä.") + '''
+<section class="section">
+  <div class="container legal">
+    <h2>1. Rekisterinpitäjä</h2>
+    <address>Lakiasiaintoimisto Virranvälke<br>Osoite: Huhtilammentie 401a, 82180 Huhtilampi (Joensuu)<br>Puhelin: <a href="tel:+358505598200">+358 50 559 8200</a><br>Sähköposti: <a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a><br>Y-tunnus: 3192420-6</address>
+
+    <h2>2. Henkilötietojen käsittelyn tarkoitus</h2>
+    <p>Lakiasiaintoimeksiannon hoitaminen ja siihen liittyvien lakisääteisten velvoitteiden täyttäminen. Rekisteröidyn suostumuksen perusteella hänen yhteystietojaan voidaan käyttää myös markkinointia varten.</p>
+
+    <h2>3. Käsittelyn oikeusperusteet</h2>
+    <p>Lakiasiaintoimeksiantosopimus, lakiasiaintoimintaan liittyvät lakisääteiset velvoitteet ja rekisteröidyn antama suostumus. Annettu suostumus voidaan peruuttaa milloin tahansa eikä tietoja käytetä enää tämän jälkeen markkinointiin.</p>
+
+    <h2>4. Henkilötietojen vastaanottajat</h2>
+    <p>Henkilötietoja käytetään pääasiassa pelkästään toimiston sisäisesti. Mikäli toimeksiannon luonne sitä edellyttää, henkilötietoja saatetaan kuitenkin toimittaa vastapuolelle, tuomioistuimelle tai muulle viranomaiselle. Henkilötietoja ei toimiteta kolmanteen maahan tai kansainväliselle järjestölle.</p>
+
+    <h2>5. Henkilötietojen säilytysaika</h2>
+    <p>Henkilötietoja säilytetään toimeksiannon voimassaoloajan, kuitenkin vähintään 10 vuotta. Asianajajan esteellisyyden selvittämiseksi tarpeelliset tiedot säilytetään pysyvästi.</p>
+
+    <h2>6. Rekisteröidyn oikeudet</h2>
+    <p>Rekisteröidyllä on oikeus tutustua omiin henkilötietoihinsa ja pyytää kyseisten tietojen oikaisemista sekä niiden poistamista, mikäli tietojen käsittelemiseen ei ole enää hyväksyttävää syytä. Tietyin edellytyksin rekisteröity voi myös pyytää henkilötietojen käsittelyn rajoittamista tai vastustaa niiden käsittelyä. Edellä kerrotusta huolimatta tietoja voidaan edelleen käsitellä lakisääteisten velvoitteiden toteuttamiseksi. Rekisteröidyllä on oikeus tehdä valitus tietosuojavaltuutetulle, mikäli hän katsoo, että hänen henkilötietojensa käsittelyssä on rikottu tietosuojalainsäädäntöä. Löydät tietosuojavaltuutetun yhteystiedot tietosuojavaltuutetun verkkosivuilta: <a href="https://www.tietosuoja.fi/etusivu/" target="_blank" rel="noopener">tietosuoja.fi</a>.</p>
+
+    <h2>7. Henkilötietojen toimittamatta jättäminen</h2>
+    <p>Henkilötiedot ovat tarpeen toimeksiannon hoitamiseksi lakimiestä velvoittavien säännösten mukaisesti. Toimeksiantoa ei voida vastaanottaa tai siitä voidaan joutua luopumaan, mikäli riittäviä henkilötietoja ei toimiteta tai niiden käsittelyä rajoitetaan tai vastustetaan tavalla, joka estää toimeksiannon hoitamisen.</p>
+
+    <h2>8. Automaattinen päätöksenteko</h2>
+    <p>Henkilötietoja ei käytetä profiloinnissa tai muussa automatisoidussa päätöksenteossa.</p>
+
+    <h2 id="tietosuojarikoslauseke">9. Tietosuojarikoslauseke</h2>
+    <p>Yrityksen ohjelmistot ovat tarkoitettu vain tavanomaiseen käyttöön verkkoselaimella. Tämä tarkoittaa asiointia Lakiasiaintoimisto Virranvälkkeen lakipalveluja saavana asiakkaana.</p>
+    <p>Yrityksen ohjelmistojen kaikenlainen luvaton ja asiaton käyttö on tietoturvarikoslainsäädännön alaista toimintaa ja tällaista tekoa tullaan arvioimaan tietoturvarikoksena.</p>
+    <p>Kiellettyä on siten ohjelmistojen hakkerointi, tietojärjestelmäkoodeihin tunkeutuminen, koodien kaappaaminen, kopioiminen ja niiden julkinen esittäminen.</p>
+    <p>Ohjelmistot ovat myös kaikilta oikeuksiltaan tekijänoikeuslainsäädännön mukaisesti suojattuja.</p>
+  </div>
+</section>
+''' + FOOTER
+
+# ---------- KÄYTTÖEHDOT ----------
+terms = head("Käyttöehdot", "Lakiasiaintoimisto Virranvälkkeen käyttöehdot.") + header("kayttoehdot.html") + page_hero("Ehdot", "Käyttöehdot", "Sivuston käyttöehdot.") + '''
+<section class="section">
+  <div class="container legal">
+    <div class="disclaimer"><p><strong>Huomio:</strong> alkuperäisellä sivustolla tämä sivu sisältää vielä sivustotyökalun mallitekstin. Teksti on kopioitu sellaisenaan ja odottaa varsinaisia käyttöehtoja.</p></div>
+    <p>Vastuuvapauslauseke: Verkkokaupan omistajana sinun tulisi julkaista sivustosi Käyttöehdot. Asiakirjassa olisi määriteltävä sinun ja asiakkaasi välinen suhde ja selittää hyvitys- ja peruutusehdot. Verkosta on löydettävissä valmiita esimerkkejä ja malleja Käyttöehtoja varten, voit etsiä hakusanoilla ”Käyttöehdot generaattori”. Joka tapauksessa, suosittelemme vahvasti pyytämään oikeudellisia neuvoja ja muokkaamaan mallia yrityksesi tarpeisiin.</p>
+  </div>
+</section>
+''' + FOOTER
+
+# ---------- TIETOSUOJAKÄYTÄNTÖ ----------
+policy = head("Tietosuojakäytäntö", "Lakiasiaintoimisto Virranvälkkeen tietosuojakäytäntö.") + header("tietosuojakaytanto.html") + page_hero("Tietosuoja", "Tietosuojakäytäntö", "Henkilötietojen käsittelyn yleiset säännöt.") + '''
+<section class="section">
+  <div class="container legal">
+    <div class="disclaimer"><p><strong>Huomio:</strong> alkuperäisellä sivustolla tämä sivu sisältää sivustotyökalun mallitekstin, jossa on täyttämättömiä kohtia [….]. Teksti on kopioitu sellaisenaan. Varsinainen tietosuojaseloste on <a href="tietosuojaseloste.html">omalla sivullaan</a>.</p></div>
+    <p>Vastuuvapauslauseke: Tämä asiakirja luotiin malliksi vain tiedotustarkoituksiin. Käyttämällä sitä hyväksyt tämän vastuuvapauslausekkeen ja otat huomioon että Webnode ei ole vastuussa toimenpiteistä tai sisällöstä jota tällä kotisivulla on. Suosittelemme, että käytät lainopillista apua ja muokkaat tästä asiakirjasta sellaisen, että se sopii yrityksesi tarpeisiin.</p>
+    <p>Verkkokauppa [….] kotisivulla [….] Y-tunnus […] paikassa […] käsittelee asiakkaan toimittamia henkilötietoja, jotka täyttävät ja vahvistavat käyttöehtojen, sähköisten tilausten ja toimitusten käsittelyn sekä tarvittavan tiedonvälityksen lain edellyttämän ajan kuluessa.</p>
+
+    <h2>Yleiset säännökset</h2>
+    <ol>
+      <li>Henkilötietojen rekisterinpitäjä, joka noudattaa GDPR-asetusta (jäljempänä ”asetus”) on [….], Y-tunnus [….], paikassa [….] (jäljempänä ”Rekisterinpitäjä”);</li>
+      <li>Rekisterinpitäjän yhteystiedot ovat: sähköposti: [……], puh.: [………];</li>
+      <li>Henkilötietoja ovat kaikki tiedot, jotka liittyvät tunnistettuun tai tunnistettavissa olevaan luonnolliseen henkilöön.</li>
+    </ol>
+
+    <h2>Henkilötietojen lähde</h2>
+    <ol>
+      <li>Rekisterinpitäjä käsittelee asiakkaan suostumuksella saamiaan henkilötietoja, jotka on kerätty sopimuksella verkkokaupan sähköisen tilauksen hankkimiseksi ja täyttämiseksi [….];</li>
+      <li>Rekisterinpitäjä käsittelee vain asiakkaan tunnistetiedot ja yhteystiedot, jotka ovat välttämättömiä ostosopimuksen täyttämiseksi;</li>
+      <li>Rekisterinpitäjä käsittelee henkilötietoja lähetys- ja kirjanpitotarkoituksiin sekä sopimuspuolten tarvittavan tiedon välittämiseen lain edellyttämän ajan verran. Henkilötietoja ei julkisteta eikä niitä siirretä muihin maihin.</li>
+    </ol>
+
+    <h2>Tietojenkäsittelyn tarkoitus</h2>
+    <p>Rekisterinpitäjä käsittelee Asiakkaan henkilötietoja seuraavissa tarkoituksissa:</p>
+    <ol>
+      <li>Kotisivun rekisteröinti [….] GDPR:n luvun 4 jakson 2 mukaisesti;</li>
+      <li>Asiakkaan luoma sähköinen tilaus (nimi, osoite, sähköposti, puhelinnumero);</li>
+      <li>Noudattaa Asiakkaan ja Rekisterinpitäjän välisestä sopimussuhteesta johtuvaa lakia ja määräyksiä;</li>
+      <li>Henkilötiedot ovat välttämättömiä ostosopimuksen täyttämiseksi. Sopimusta ei voida tehdä ilman henkilökohtaisia tietoja.</li>
+    </ol>
+
+    <h2>Henkilötietojen tallennuksen kesto</h2>
+    <ol>
+      <li>Rekisterinpitäjä tallentaa henkilötietoja niin kauan kuin on tarpeen Rekisterinpitäjän ja Asiakkaan välisestä sopimussuhteesta johtuvien oikeuksien ja velvoitteiden täyttämiseksi ja kolmen vuoden ajan sopimussuhteen päättymisen jälkeen;</li>
+      <li>Rekisterinpitäjän on poistettava kaikki henkilökohtaiset tiedot henkilötietojen säilyttämiseen tarvittavan ajan kuluttua.</li>
+    </ol>
+
+    <h2>Henkilötietojen vastaanottajat ja käsittelijät</h2>
+    <p>Asiakkaan henkilötietoja käsittelevät kolmannet osapuolet ovat Rekisterinpitäjän alihankkijoita. Näiden alihankkijoiden palvelut ovat välttämättömiä, jotta sopimus sähköisen tilauksen hankkimisesta ja käsittelystä Rekisterinpitäjän ja Asiakkaan välisessä sopimuksessa voidaan toteuttaa.</p>
+    <p>Rekisterinpitäjän alihankkijoita ovat:</p>
+    <ul>
+      <li>Webnode AG (verkkokauppajärjestelmä);</li>
+      <li>Rahtiyhtiö;</li>
+      <li>Google Analytics (kotisivun analytiikka);</li>
+    </ul>
+
+    <h2>Asiakkaan oikeudet</h2>
+    <p>Asetuksen mukaisesti Asiakkaalla on oikeus:</p>
+    <ol>
+      <li>oikeus tutustua henkilötietoihin;</li>
+      <li>oikeus henkilötietojen oikaisuun;</li>
+      <li>oikeus henkilötietojen poistamiseen;</li>
+      <li>oikeus vastustaa henkilötietojen käsittelyä;</li>
+      <li>oikeus tietojen siirrettävyyteen;</li>
+      <li>oikeus peruuttaa suostumuksensa henkilötietojen käsittelyyn kirjallisesti tai sähköpostitse osoitteeseen: [….];</li>
+      <li>oikeus esittää valitus valvontaviranomaiselle, jos epäillään Asetuksen rikkomista.</li>
+    </ol>
+
+    <h2>Henkilötietojen turvallisuus</h2>
+    <ol>
+      <li>Rekisterinpitäjä sitoutuu toteuttamaan kaikki tekniset ja organisatoriset varotoimet, jotka ovat tarpeen henkilötietojen suojaamiseksi.</li>
+      <li>Rekisterinpitäjä on tehnyt teknisiä varotoimenpiteitä tietojen tallennustilojen turvaamiseksi, erityisesti varmistanut pääsyn tietokoneelle salasanan avulla, käyttänyt virustentorjuntaohjelmistoa ja ylläpitänyt tietokoneita säännöllisesti.</li>
+    </ol>
+
+    <h2>Loppusäännökset</h2>
+    <ol>
+      <li>Tekemällä sähköisen tilauksen verkkosivustolla [….] Asiakas vakuuttaa olevansa tietoinen kaikista henkilötietosuojaehdoista ja hyväksyy ne täysimittaisesti;</li>
+      <li>Asiakas hyväksyy nämä säännöt valitsemalla valintaruudun tilauskaavakkeessa;</li>
+      <li>Rekisterinpitäjä voi päivittää nämä Säännöt milloin tahansa. Uusi, päivitetty versio on julkaistava tällä verkkosivulla.</li>
+    </ol>
+    <p>Nämä säännöt tulevat voimaan [päivämäärä].</p>
+  </div>
+</section>
+''' + FOOTER
+
+pages = {
+  "index.html": index,
+  "tietoa-meista.html": about,
+  "tiimimme.html": team,
+  "yhteydenotto.html": contact,
+  "tietosuojaseloste.html": privacy,
+  "kayttoehdot.html": terms,
+  "tietosuojakaytanto.html": policy,
+}
+for name, html in pages.items():
+    with open(os.path.join(OUT, name), "w", encoding="utf-8", newline="\n") as f:
+        f.write(html)
+    print("wrote", name, len(html))

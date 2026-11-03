@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Käyttöehdot – Lakiasiaintoimisto Virranvälke (demo)</title>
+<meta name="description" content="Lakiasiaintoimisto Virranvälkkeen käyttöehdot.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23122441'/%3E%3Cpath d='M9 12l7 16 4-9 4 9 7-16' fill='none' stroke='%23e9d9b5' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="demo-banner"><strong>Demo</strong> Tämä on esittelyversio uudesta sivustosta. Lomakkeet ja painikkeet eivät vielä tee mitään oikeasti.</div>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#122441"/><path d="M9 12l7 16 4-9 4 9 7-16" fill="none" stroke="#e9d9b5" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="brand-text"><small>Lakiasiaintoimisto</small><span>Virranvälke</span></span></a>
+    <button class="nav-toggle" aria-label="Valikko" aria-expanded="false" aria-controls="nav">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="nav"><a href="index.html">Koti</a><a href="tietoa-meista.html">Tietoa meistä</a><a href="tiimimme.html">Tiimimme</a><a href="tietosuojaseloste.html">Tietosuojaseloste</a><a class="btn btn-gold btn-sm" href="yhteydenotto.html">Ota yhteyttä</a></nav>
+  </div>
+</header>
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow">Ehdot</div>
+    <h1>Käyttöehdot</h1>
+    <p>Sivuston käyttöehdot.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container legal">
+    <div class="disclaimer"><p><strong>Huomio:</strong> alkuperäisellä sivustolla tämä sivu sisältää vielä sivustotyökalun mallitekstin. Teksti on kopioitu sellaisenaan ja odottaa varsinaisia käyttöehtoja.</p></div>
+    <p>Vastuuvapauslauseke: Verkkokaupan omistajana sinun tulisi julkaista sivustosi Käyttöehdot. Asiakirjassa olisi määriteltävä sinun ja asiakkaasi välinen suhde ja selittää hyvitys- ja peruutusehdot. Verkosta on löydettävissä valmiita esimerkkejä ja malleja Käyttöehtoja varten, voit etsiä hakusanoilla ”Käyttöehdot generaattori”. Joka tapauksessa, suosittelemme vahvasti pyytämään oikeudellisia neuvoja ja muokkaamaan mallia yrityksesi tarpeisiin.</p>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Lakiasiaintoimisto Virranvälke</h4>
+        <p>Y-tunnus 3192420-6<br>Joensuu<br>Online-virtuaalitoimisto, tapaamiset sopimuksen mukaan.</p>
+      </div>
+      <div>
+        <h4>Yhteystiedot</h4>
+        <ul>
+          <li><a href="tel:+358505598200">+358 50 559 8200</a></li>
+          <li><a href="mailto:ovirma@gmail.com">ovirma@gmail.com</a></li>
+          <li><a href="yhteydenotto.html">Yhteydenottolomake</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sivusto</h4>
+        <ul>
+          <li><a href="tietoa-meista.html">Tietoa meistä</a></li>
+          <li><a href="tiimimme.html">Tiimimme</a></li>
+          <li><a href="tietosuojaseloste.html">Tietosuojaseloste</a></li>
+          <li><a href="kayttoehdot.html">Käyttöehdot</a></li>
+          <li><a href="tietosuojakaytanto.html">Tietosuojakäytäntö</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lakiasiaintoimisto Virranvälke</span>
+      <span>Demo-sivusto · <a href="#" data-cookie-open>Evästeet</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="dialog" aria-label="Evästeet">
+  <p>Käytämme evästeitä mahdollistaaksemme verkkosivustomme asianmukaisen toiminnan ja turvallisuuden sekä tarjotaksemme sinulle parhaan mahdollisen käyttökokemuksen.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary btn-sm" data-cookie="necessary">Hyväksy vain tarpeelliset</button>
+    <button class="btn btn-outline btn-sm" data-cookie="all">Hyväksy kaikki</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/main.js"></script>
+</body>
+</html>
